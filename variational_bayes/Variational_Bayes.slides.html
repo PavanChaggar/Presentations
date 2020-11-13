@@ -124,6 +124,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   font-size: 40px;
 }
 
+.logo {
+  width: 100px;
+  float: right;
+  position: relative;
+  padding: 0 0 200px 0;
+}
   </style>
 
 
@@ -14414,7 +14420,8 @@ div.jp-OutputPrompt {
         }
     }
 </script><script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/title-slide-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/title-slide-background.png");
+
 </script><p><h1 style="color:White;">Variational Bayesian Inference</h1></p>
 <p><h2 style="color:White;" >Pavan Chaggar</h2></p>
 
@@ -14422,9 +14429,10 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
-</script><h2 id="Outline:">Outline:<a class="anchor-link" href="#Outline:">&#182;</a></h2><ul>
+<p><script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script></p>
+<h2 id="Outline:">Outline:<a class="anchor-link" href="#Outline:">&#182;</a></h2><ul>
 <li>Introduction and Motivation </li>
 <li>Variational Bayes</li>
 <li>Application to modelling Alzheimer's</li>
@@ -14435,14 +14443,14 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><h2 id="Introduction-and-Motivation:-Why-do-Bayesian-Inference?">Introduction and Motivation: Why do Bayesian Inference?<a class="anchor-link" href="#Introduction-and-Motivation:-Why-do-Bayesian-Inference?">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><p>Very simply, we wish to assess the evidence for some hypothesis given some data. Or, alternatively, ask what does this model tell us about the data?</p>
 
 </div>
@@ -14477,7 +14485,7 @@ $$p(\mathbf{z} \mid \mathbf{x}) = \frac{p(\mathbf{x} \mid \mathbf{z})p(\mathbf{z
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><h3 id="Bayes-Price-Laplace-Rule">Bayes-Price-Laplace Rule<a class="anchor-link" href="#Bayes-Price-Laplace-Rule">&#182;</a></h3>$$ \underbrace{p(\mathbf{z} \mid \mathbf{x})}_{posterior} = \frac{\overbrace{p(\mathbf{x} \mid \mathbf{z})}^{likelihood}\overbrace{p(\mathbf{z})}^{prior}}{\underbrace{p(\mathbf{x})}_{evidence}} $$
 </div>
 </div><div class="fragment">
@@ -14516,14 +14524,14 @@ $$p(\mathbf{z} \mid \mathbf{x}) = \frac{p(\mathbf{x} \mid \mathbf{z})p(\mathbf{z
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><p>So, why can't we just calculate this? The problem lies in the denominator, evaluated as:</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$ {p(\mathbf{x})} = \int p(\mathbf{x} \mid \mathbf{z}) d\mathbf{z} $$
+$$ {p(\mathbf{x})} = \int p(\mathbf{x} , \mathbf{z}) d\mathbf{z} $$
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14547,14 +14555,14 @@ $$ {p(\mathbf{x})} = \int p(\mathbf{x} \mid \mathbf{z}) d\mathbf{z} $$
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><h2 id="Variational-Bayesian-Inference">Variational Bayesian Inference<a class="anchor-link" href="#Variational-Bayesian-Inference">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><p>VB aims to circumvent the large time complexity by approaching the problem through optimisation.</p>
 <p>The process begins by positing a contrived <em>approximate</em> density, $\mathfrak{D}$ of latent variables $\mathbf{z}$.</p>
 
@@ -14575,9 +14583,9 @@ $$ q^{*}(\mathbf{z}) = \underset{q(\mathbf{z}) \in \mathfrak{D}}{argmin} \mathrm
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><p>To make this more clear, we can rewrite the expression using Bayes' rule:</p>
-$$ q^{*}(\mathbf{z}) = \underset{q(\mathbf{z}) \in \mathfrak{D}}{argmin} \mathrm{KL}\bigg(q(\mathbf{z}) \mid \mid \frac{\log p(\mathbf{x} \mid \mathbf{z})\log p(\mathbf{z})}{p(\mathbf{x})}\bigg) $$
+$$ q^{*}(\mathbf{z}) = \underset{q(\mathbf{z}) \in \mathfrak{D}}{argmin} \mathrm{KL}\bigg(q(\mathbf{z}) \mid \mid \frac{p(\mathbf{x} \mid \mathbf{z})p(\mathbf{z})}{p(\mathbf{x})}\bigg) $$
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14600,7 +14608,9 @@ $$ \mathrm{KL}(q(\mathbf{z}) \mid \mid p(\mathbf{z} \mid \mathbf{x})) = \mathbb{
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>There are a number of methods with which to optmise the free energy. Here, we focus on analytic variational Bayes, which uses the calculus of variations to perform the optimisation.</p>
+<script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script><p>There are a number of methods with which to optmise the free energy. Here, we focus on analytic variational Bayes, which uses the calculus of variations to perform the optimisation.</p>
 
 </div>
 </div><div class="fragment">
@@ -14616,16 +14626,15 @@ $$ p(z_{i}) \propto \int p(x \mid z)p(z)q(z_{-i})dz_{-i} $$<p></p>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
-</script></p>
-<h2 id="Applications">Applications<a class="anchor-link" href="#Applications">&#182;</a></h2>
+<script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script><h2 id="Applications">Applications<a class="anchor-link" href="#Applications">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><p>In the context of Alzheimer's modelling, we can use the variational inference framework to estimate the posterior distributions of our model parameters given some data.</p>
 <p>The first step in doing this is to specify a generative model (a data generating process).</p>
 
@@ -14634,7 +14643,7 @@ $$ p(z_{i}) \propto \int p(x \mid z)p(z)q(z_{-i})dz_{-i} $$<p></p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><h3 id="Forward-Model">Forward Model<a class="anchor-link" href="#Forward-Model">&#182;</a></h3><p>We can set up a forward model in the following way and begin variational inference.</p>
 <p>Firstly, we assume the data, $\mathbf{y}$ are generated by a non-linear forward model with normally distributed noise:</p>
 $$ \mathbf{y} = g(\boldsymbol{\theta}) + \epsilon $$<p>
@@ -14665,7 +14674,7 @@ $$ L = \log p(\mathbf{y} \mid \mathbf{\Theta}) + \log p(\theta) + \log p(\phi) $
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script><p>Lastly, as per the mean field assumption, we can factorise the approximate posterior into two groups:</p>
 $$ q(\Theta \mid \mathbf{y}) = q(\theta_n)q(\phi_n) $$<p></p>
 
@@ -14688,16 +14697,15 @@ $$ q(\phi \mid \mathbf{y}) \approx Ga(\phi; s, c) $$<p></p>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
-</script></p>
-<h2 id="A-Software-Interlude...">A Software Interlude...<a class="anchor-link" href="#A-Software-Interlude...">&#182;</a></h2>
+<script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script><h2 id="A-Software-Interlude...">A Software Interlude...<a class="anchor-link" href="#A-Software-Interlude...">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14732,7 +14740,7 @@ $$ q(\phi \mid \mathbf{y}) \approx Ga(\phi; s, c) $$<p></p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14765,7 +14773,9 @@ $$ q(\phi \mid \mathbf{y}) \approx Ga(\phi; s, c) $$<p></p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img align="right" width="500" height="750" src="forward_results.png"></p>
+<script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script><p><img align="right" width="500" height="750" src="forward_results.png"></p>
 <p>This generates a forward model that produces the curve seen in (a)</p>
 <p>We can generate synthetic data by adding Gaussian noise, $\mathcal{N}(0,0.1)$</p>
 <p>Our goal is to infer the initial parameter values underlying (a) from the data (b)</p>
@@ -14776,7 +14786,7 @@ $$ q(\phi \mid \mathbf{y}) \approx Ga(\phi; s, c) $$<p></p>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
 </script>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14847,10 +14857,9 @@ $$ q(\phi \mid \mathbf{y}) \approx Ga(\phi; s, c) $$<p></p>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/presentations/ox-math-background.png");
-</script></p>
-<h1 id="Work-to-do">Work to do<a class="anchor-link" href="#Work-to-do">&#182;</a></h1>
+<script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script><h1 id="Work-to-do">Work to do<a class="anchor-link" href="#Work-to-do">&#182;</a></h1>
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14884,10 +14893,12 @@ $$ q(\phi \mid \mathbf{y}) \approx Ga(\phi; s, c) $$<p></p>
 </ul>
 
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Useful-References">Useful References<a class="anchor-link" href="#Useful-References">&#182;</a></h2><p>Beal, M.J. (2003)
+<script>
+    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background.png");
+</script><h2 id="Useful-References">Useful References<a class="anchor-link" href="#Useful-References">&#182;</a></h2><p>Beal, M.J. (2003)
 Variational Algorithms for Approximate Bayesian Inference
 <a href="https://cse.buffalo.edu/faculty/mbeal/thesis/">https://cse.buffalo.edu/faculty/mbeal/thesis/</a></p>
 <p>Blei, D. et al., (2017)
@@ -14898,21 +14909,7 @@ The FMRIB Variational Bayes Tutorial
 <a href="https://vb-tutorial.readthedocs.io/en/latest/">https://vb-tutorial.readthedocs.io/en/latest/</a></p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 </body>

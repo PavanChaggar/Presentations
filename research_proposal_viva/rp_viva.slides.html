@@ -14432,11 +14432,10 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<script>
-    setBackgroundImage("/Users/pavanchaggar/Documents/ResearchDocs/Presentations/background_imgs/ox-math-background_cropped.png");
-</script><h1 id="Outline">Outline<a class="anchor-link" href="#Outline">&#182;</a></h1><ul>
+<h1 id="Outline">Outline<a class="anchor-link" href="#Outline">&#182;</a></h1><ul>
 <li>Background</li>
-<li>Summarising Rotation Work </li>
+<li>Rotation 1</li>
+<li>Rotation 2</li>
 <li>Intended Future Work</li>
 </ul>
 
@@ -14455,24 +14454,20 @@ div.jp-OutputPrompt {
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Early observations [1] suggest these proteins exhibit prion-like properties, namely their ability to induce misfolding in their surrounding counterparts. This property begets the ability of toxic A$\beta$ and $\tau$P to propogate through the brain.</p>
+<p>Evidence suggest these proteins exhibit prion-like properties, namely their ability to induce misfolding in their surrounding counterparts. This property begets the ability of toxic A$\beta$ and $\tau$P to propogate through the brain.</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>These toxic prion-like proteins have been shown to have a characteristic spread through the brain. $\tau$P, in particular, is correlated with progression of atrophy in the brain.</p>
+<p>Additionally, A$\beta$ and $\tau$P have been shown to have a characteristic spread through the brain. $\tau$P, in particular, is correlated with progression of atrophy in the brain.</p>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>These predictable properties show potential to be used as a clinilcal biomarker for the progression of AD.</p>
-<script>
-    <footer>
-            <p> this is a footer </p>
-    </footer>
-</script>
+
 </div>
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14487,16 +14482,16 @@ div.jp-OutputPrompt {
 <img align="top" width="700" height="400" src="matusda_atrophy.png"></p>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Rotation-1:">Rotation 1:<a class="anchor-link" href="#Rotation-1:">&#182;</a></h1><p>Increasingly sophisticated mathematical models have captured toxic protein diffusion through the brain. This are typically of two flavours, ODE models or probabilistic models.</p>
+<h1 id="Rotation-1">Rotation 1<a class="anchor-link" href="#Rotation-1">&#182;</a></h1><p>Increasingly sophisticated mathematical models have captured toxic protein diffusion through the brain. These are typically of two flavours: ODE models or probabilistic models.</p>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Some work has provided correlative analyses between protein deposition, atrophy from sMRI [2] and patient PET [3]. However, these models are either simple linear ODE models or probabilstic models that do not provide mechanistic insights.</p>
+<p>Some modelling work has provided correlative analyses between simulated protein spread, atrophy from sMRI [1] and patient PET [2]. However, these models are either simple linear ODE models or probabilstic models that do not provide mechanistic insights.</p>
 
 </div>
 </div></div><div class="fragment">
@@ -14508,7 +14503,7 @@ div.jp-OutputPrompt {
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This is is the central problem that motivates the research programme of this DPhil.</p>
+<p>This is the central problem that motivates the research programme of this DPhil.</p>
 
 </div>
 </div></div></section><section>
@@ -14528,30 +14523,147 @@ $$ \frac{dp}{dt} = -k\mathcal{L}p $$
 <p>This only descibes diffusion on a network. To include some description of prion-like dynamics, we can augment the heat equation with a logsitic growth term:</p>
 $$ \frac{dp_{i}}{dt} = -k\sum_{j=1}^{N}\mathcal{L}_{ij} p_j + \alpha p_i(1 - p_i) $$
 </div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>and we can add additional complexity by considering interactions between healthy and and toxic proteins.</p>
+\begin{align}
+    \frac{d\mathbf{p}_{i}}{dt} &amp; =  -\rho\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{p}_j +  k_0 - k_1 \mathbf{p}_i - k_{12}\mathbf{p}_i \mathbf{\hat{p}}_i, \\
+    \frac{d\mathbf{\hat{p}}_i}{dt} &amp;= -\hat{\rho}\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{\hat{p}}_j - \hat{k}_1 \mathbf{\hat{p}}_i + k_{12}\mathbf{p_i}\mathbf{\hat{p}_i}
+\end{align}
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>and couple with multiple toxic species.
+\begin{align}
+\frac{d\mathbf{v}_i}{dt} &amp; =  -\kappa\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{v}_j +  b_0 - b_1 \mathbf{v}_i - b_{12}v_i \mathbf{\hat{v}}_i -b_3\mathbf{\hat{p}}_i\mathbf{v}_i\mathbf{\hat{v}}_i \\
+    \frac{d\mathbf{\hat{v}}_i}{dt} &amp;= -\hat{\kappa}\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{\hat{v}}_j - \hat{b}_1 \mathbf{\hat{v}}_i + b_{12}\mathbf{v}_i\mathbf{\hat{v}}_i + b_3\mathbf{\hat{p}}_i\mathbf{v}_i\mathbf{\hat{v}}_i
+\end{align}</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img align="top" width="700" height="400" src="goriely_fkpp-hxd.png"></p>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Data-Analysis-and-Representation">Data Analysis and Representation<a class="anchor-link" href="#Data-Analysis-and-Representation">&#182;</a></h3>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>I conducted a pilot analysis on ADNI subjects who had structural MRI, A$\beta$ and $\tau$P PET.</p>
+
+</div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>and we can add additional complexity by considering interactions between multiple toxic protein species (e.g. A$\beta$ and $\tau$P:</p>
-\begin{align}
-    \frac{dp_{i}}{dt} &amp; =  -\rho\sum\limits_{j=1}^{N}\mathcal{L}_{ij}^{\omega}p_j +  k_0 - k_1 p_i - k_{12}p_i \hat{p}_i, \\
-    \frac{d{\hat{p}}_i}{dt} &amp;= -\hat{\rho}\sum\limits_{j=1}^{N}\mathcal{L}_{ij}^{\omega}\hat{p}_j - \hat{k}_1 \hat{p}_i + k_{12}p_i\hat{p}_i
-\end{align}
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
+<p>Using a standard data processing pipeline in SPM, I analysed the sMRI and PET data for the four groups: young cognitively normal (sMRI only), old cognitively normal, late MCI, early AD.</p>
 
-     </div>
 </div>
-</div>
-</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="Voxel-Based-Morphometry-of-sMRI">Voxel Based Morphometry of sMRI<a class="anchor-link" href="#Voxel-Based-Morphometry-of-sMRI">&#182;</a></h5><p><img align="top" width="700" height="400" src="spm_atrophy.png"></p>
 
-</div></div></section></section>
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="Atrophy-and-Diffusion-Maps-on-the-Connectome">Atrophy and Diffusion Maps on the Connectome<a class="anchor-link" href="#Atrophy-and-Diffusion-Maps-on-the-Connectome">&#182;</a></h5><p><img align="top" width="700" height="400" src="connectome_maps.png"></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Rotation-2">Rotation 2<a class="anchor-link" href="#Rotation-2">&#182;</a></h1>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now that we have models and data, we need a method to bring them together. Where as previous studies have opted for correlative analysis, we aim to fit a full generative model of the data and model within a Bayesian framework.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>This will allow us to obtain data-derived parameter estimates and gain insight into model uncertainty and identifiability.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We do this using the Bayes-Price-Laplace rule:</p>
+
+</div>
+</div></div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Bayes-Price-Laplace-Rule">Bayes-Price-Laplace Rule<a class="anchor-link" href="#Bayes-Price-Laplace-Rule">&#182;</a></h3>$$ \underbrace{p(\mathbf{z} \mid \mathbf{x})}_{posterior} = \frac{\overbrace{p(\mathbf{x} \mid \mathbf{z})}^{likelihood}\overbrace{p(\mathbf{z})}^{prior}}{\underbrace{p(\mathbf{x})}_{evidence}} $$
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Likelihood: Probability that a particular set of parameter values generate the observations    </li>
+<li>Prior: Probability representing our initial beliefs about the parameter values.</li>
+<li>Evidence: Normalising factor; probability of observing our data (given our model). Otherwise known as the marginal likelihood.</li>
+<li>Posterior: Probability that some data are <em>caused</em> by some set of parameters.</li>
+</ul>
+
+</div>
+</div></section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img align="left" width="400" height="700" src="forward_results.png">
+<img align="right" width="400" height="700" src="inference_results.png"></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Intended-Future-Work">Intended Future Work<a class="anchor-link" href="#Intended-Future-Work">&#182;</a></h1><p>The majority of work over the coming year will revolve around implementing the Bayesian inference machinary necessary to evaluate the mathematical models.</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>At present, I am testing the robustness of the analytic variational Bayes implementation. However, there are various downsides to this, namely, that it requires many assumptions about the data.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>After testing the analyical method, I plan to explore stochastic variational bayes using automatic differentiation and likelihood-free based methods. These place fewer constraints on the generative model and could offere greater robustness against sparse data.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In addition, since we are looking to infer values are different levels of resolution, I hope to implement a multiscale/multigrid method of inference that uses a hyrbid of methods for efficient and accurate computation.</p>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>We plan to package this within an open source software framework that facilitate macroscale brain network modelling and inference. The goal within the next year is to publish a software paper and application paper of this software.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="References:">References:<a class="anchor-link" href="#References:">&#182;</a></h3><p>[1]: Raj A, LoCastro E, Kuceyeski A, Tosun D, Relkin N, Weiner M, (ADNI ADNI, et al. Network diffusion model of progression predicts longitudinal patterns of atrophy and metabolism in Alzheimer’s disease. Cell reports. 2015; 10(3):359–369.</p>
+<p>[2] Jacob W Vogel, Yasser Iturria-Medina, Olof T Strandberg, Ruben Smith, Elizabeth Levitis, Alan C Evans, and Oskar Hansson. Spread of patho- logical tau proteins through communicating neurons in human alzheimer’s disease. Nature Communications, 11(1):1–15, 2020.</p>
+<p>Walker,  L.C.,  Jucker,  M.:  Neurodegenerative  diseases:  expanding  the  prion  concept.Annual review of neuroscience38, 87–103 (2015</p>
+<p>H Matusda. Voxel-based Morphometry of Brain MRI in Normal Aging and Alzheimer’s Disease, Aging Dis. 2013 Feb; 4(1): 29–37</p>
+<p>Fornari S, Schäfer A, Jucker M, Goriely A, Kuhl E. Prion-like spreading of Alzheimer’s disease within the brain’s connectome. Journal of the Royal Society Interface. 2019; 16(159):20190356</p>
+
+</div>
+</div></section></section>
 </div>
 </div>
 </body>

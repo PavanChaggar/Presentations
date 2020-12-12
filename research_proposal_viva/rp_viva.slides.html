@@ -14485,7 +14485,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Rotation-1">Rotation 1<a class="anchor-link" href="#Rotation-1">&#182;</a></h1><p>Increasingly sophisticated mathematical models have captured toxic protein diffusion through the brain. These are typically of two flavours: ODE models or probabilistic models.</p>
+<h1 id="Summary-of-Rotation-Work">Summary of Rotation Work<a class="anchor-link" href="#Summary-of-Rotation-Work">&#182;</a></h1><p>Increasingly sophisticated mathematical models have captured toxic protein diffusion through the brain. These are typically of two flavours: ODE models or probabilistic models.</p>
 
 </div>
 </div><div class="fragment">
@@ -14497,7 +14497,7 @@ div.jp-OutputPrompt {
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Augmented model such as FKPP equation or heterodimer models offer a richer explanation of how dynamics between prion-like proteins <em>causes</em> AD pathology. However, with growing model complexity, rigourous analysis with data becomes more difficult.</p>
+<p>Augmented model such as FKPP equation or heterodimer models offer a richer explanation of how dynamics between prion-like proteins <em>causes</em> AD pathology. However, with growing model complexity, rigourous comparison with data becomes more difficult.</p>
 
 </div>
 </div></div><div class="fragment">
@@ -14509,33 +14509,18 @@ div.jp-OutputPrompt {
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="A-Brief-Mathematical-Interlude">A Brief Mathematical Interlude<a class="anchor-link" href="#A-Brief-Mathematical-Interlude">&#182;</a></h3>
+<h2 id="Mathematical-Models">Mathematical Models<a class="anchor-link" href="#Mathematical-Models">&#182;</a></h2>
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>We focus on (reaction-)diffusion ordinary differential equation models. The simplest of which is the network diffusion equation:</p>
-$$ \frac{dp}{dt} = -k\mathcal{L}p $$
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This only descibes diffusion on a network. To include some description of prion-like dynamics, we can augment the heat equation with a logsitic growth term:</p>
-$$ \frac{dp_{i}}{dt} = -k\sum_{j=1}^{N}\mathcal{L}_{ij} p_j + \alpha p_i(1 - p_i) $$
-</div>
-</div></div></section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>and we can add additional complexity by considering interactions between healthy and and toxic proteins.</p>
+<p>Models of toxic protein propogation focus on (reaction-)diffusion ordinary differential equation models. The simplest of which is the network diffusion equation:</p>
+$$ \frac{d\mathbf{p}}{dt} = -k\mathcal{L}\mathbf{p} $$<p>This only descibes diffusion on a network. To include some description of prion-like dynamics, we can augment the heat equation with a logsitic growth term:</p>
+$$ \frac{d\mathbf{p}_{i}}{dt} = -k\sum_{j=1}^{N}\mathcal{L}_{ij} \mathbf{p}_j + \alpha \mathbf{p}_i(1 - \mathbf{p}_i) $$<p>and we can add additional complexity by considering interactions between healthy and and toxic proteins.</p>
 \begin{align}
     \frac{d\mathbf{p}_{i}}{dt} &amp; =  -\rho\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{p}_j +  k_0 - k_1 \mathbf{p}_i - k_{12}\mathbf{p}_i \mathbf{\hat{p}}_i, \\
     \frac{d\mathbf{\hat{p}}_i}{dt} &amp;= -\hat{\rho}\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{\hat{p}}_j - \hat{k}_1 \mathbf{\hat{p}}_i + k_{12}\mathbf{p_i}\mathbf{\hat{p}_i}
-\end{align}
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>and couple with multiple toxic species.
+\end{align}<p>and couple with multiple toxic species.
 \begin{align}
 \frac{d\mathbf{v}_i}{dt} &amp; =  -\kappa\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{v}_j +  b_0 - b_1 \mathbf{v}_i - b_{12}v_i \mathbf{\hat{v}}_i -b_3\mathbf{\hat{p}}_i\mathbf{v}_i\mathbf{\hat{v}}_i \\
     \frac{d\mathbf{\hat{v}}_i}{dt} &amp;= -\hat{\kappa}\sum\limits_{j=1}^{N}\mathcal{L}_{ij}\mathbf{\hat{v}}_j - \hat{b}_1 \mathbf{\hat{v}}_i + b_{12}\mathbf{v}_i\mathbf{\hat{v}}_i + b_3\mathbf{\hat{p}}_i\mathbf{v}_i\mathbf{\hat{v}}_i
@@ -14545,13 +14530,13 @@ $$ \frac{dp_{i}}{dt} = -k\sum_{j=1}^{N}\mathcal{L}_{ij} p_j + \alpha p_i(1 - p_i
 </div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img align="top" width="700" height="400" src="goriely_fkpp-hxd.png"></p>
+<p><img width="700" height="400" src="goriely_fkpp-hxd.png"></p>
 
 </div>
 </div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Data-Analysis-and-Representation">Data Analysis and Representation<a class="anchor-link" href="#Data-Analysis-and-Representation">&#182;</a></h3>
+<h2 id="Data-Analysis-and-Representation">Data Analysis and Representation<a class="anchor-link" href="#Data-Analysis-and-Representation">&#182;</a></h2>
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14565,13 +14550,13 @@ $$ \frac{dp_{i}}{dt} = -k\sum_{j=1}^{N}\mathcal{L}_{ij} p_j + \alpha p_i(1 - p_i
 <p>Using a standard data processing pipeline in SPM, I analysed the sMRI and PET data for the four groups: young cognitively normal (sMRI only), old cognitively normal, late MCI, early AD.</p>
 
 </div>
-</div></div></section><section>
+</div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h5 id="Voxel-Based-Morphometry-of-sMRI">Voxel Based Morphometry of sMRI<a class="anchor-link" href="#Voxel-Based-Morphometry-of-sMRI">&#182;</a></h5><p><img align="top" width="700" height="400" src="spm_atrophy.png"></p>
+<p>The results of these analyses were summarised on a connectome to facilitate comparison with connectome network simulations.</p>
 
 </div>
-</div></section><section>
+</div></div></section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h5 id="Atrophy-and-Diffusion-Maps-on-the-Connectome">Atrophy and Diffusion Maps on the Connectome<a class="anchor-link" href="#Atrophy-and-Diffusion-Maps-on-the-Connectome">&#182;</a></h5><p><img align="top" width="700" height="400" src="connectome_maps.png"></p>
@@ -14580,7 +14565,7 @@ $$ \frac{dp_{i}}{dt} = -k\sum_{j=1}^{N}\mathcal{L}_{ij} p_j + \alpha p_i(1 - p_i
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Rotation-2">Rotation 2<a class="anchor-link" href="#Rotation-2">&#182;</a></h1>
+<h2 id="Inference">Inference<a class="anchor-link" href="#Inference">&#182;</a></h2>
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">

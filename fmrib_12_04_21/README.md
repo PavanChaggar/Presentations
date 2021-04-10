@@ -1,0 +1,1 @@
+Presentation for FMRIB Diffusion Analysis group meeting on 12/04/21. The presentation is an introdcution to my DPhil and Julia. The presentation takes the form of Pluto notebooks, each showing a different part of my research.

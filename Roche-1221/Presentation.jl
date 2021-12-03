@@ -91,9 +91,8 @@ md"## Braak Stages of Tau protein
 In most AD cases, τP follows a predictable pattern of spreading, starting in the entorhinal cortex before spreading through the hippocampal regions, lateral cortex and finally into the neocortex. Atrophy tends to follow the spreading pattern of $\tau$P, more so than that of Aβ."
 
 
-# ╔═╡ 703b4044-ab3f-4e6f-a567-ba41942abe72
-html"""<img src="https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/braak-stages.png?raw=true" height=300 width=900 >"""
-
+# ╔═╡ 70d3f5ff-aa7e-4cc3-8aca-db403a7de855
+pic("https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/braak-stages.png"; h=300, w=900)
 
 # ╔═╡ c484008a-ec30-4d73-bc6e-f462a5d187b1
 md" 
@@ -102,8 +101,7 @@ md"
 An important part of the modelling of $\tau$P in AD is describing transport. In this work, we do this using the graph Laplacian, a discrete counterpart to the Laplace operator used to describe diffusion in a continuous setting. The graph Laplacian is derived from a graph of brain connections, generated using tractography. "
 
 # ╔═╡ a1e74c91-7f6a-4ca9-b497-151e2d5875c3
-html"""
-<img src="https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/connectomes/connectome-pit.png?raw=true" height=300 width=900>"""
+pic("https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/connectomes/connectome-pit.png"; h =300, w=900)
 
 # ╔═╡ 5a8dc4c9-246c-4dd1-ba62-638f0879d7b7
 md" 
@@ -185,9 +183,7 @@ md"
 "
 
 # ╔═╡ 2967e74c-0f2b-4d7d-bc29-9c54c71cc242
-html"""
-Recall the autocatalytic process
-<img src="https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/heterodimerkinetics.png?raw=true" height=150 width=300 vspace=20, hspace=275>"""
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/heterodimerkinetics.png"; h=150, w=300, vspace=20, hspace=275)
 
 # ╔═╡ 8907ecbb-2127-40e3-a012-acd52dfb2508
 md"
@@ -203,10 +199,7 @@ We can describe this process with the following reaction-diffusion equations, wh
 md" ## The FKPP Model"
 
 # ╔═╡ 432b0862-c18c-444b-8b4c-385c0c3d0405
-html"""
-The protein dynamics (here shown for a single toxic species) can be simplified in the following way:
-<img src="https://github.com/PavanChaggar/inference-methods-UCSF0721/blob/main/assets/images/fkppkinetics.png?raw=true
-" height=150 width=300 vspace=10 hspace=290>"""
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/fkppkinetics.png"; h=150, w=300, vspace=10, hspace=290)
 
 # ╔═╡ ade96765-12dd-4fe8-a4e7-be975304441d
 md"""
@@ -285,62 +278,6 @@ md"## Reverand, What Does it Mean?
 - Posterior: Probability of some parameter values $\theta$ given that we have made observations $\mathbf{x}$. 
 "
 
-# ╔═╡ cb865d40-3a15-469f-9a63-2c04a8840ca1
-md"## Why is Bayesian Inference Hard? Because Integration is hard! 
-It's almost always the case that we cannot do Bayesian inference analytically. The principal reason for this comes from the evidence term: 
-
-$${p(\mathbf{x})} = \int p(\mathbf{x} , \mathbf{\theta}) d\mathbf{\theta}$$
-
-As $\theta$ becomes larger, the complexity of integration grows exponentially with the dimensionality. Hence, naive numerical integration (such as quadrature) becomes computationally infeasible. "
-
-# ╔═╡ 43daff92-8265-429e-af25-9b796b599825
-md"# Hamiltonian Monte Carlo 
-MCMC methods allow one to sample from the posterior, as opposed to approximating it. Tradiational algortihms like Metroplis-Hastings are good for low dimensional problems, but don't sacle well. HMC allows one to take efficient steps during sampling, even in high dimensional space
-"
-
-# ╔═╡ 6359cc18-634c-483c-8739-91ee80cf2dfe
-md"## Metropolis-Hastings: Brief Review
-HMC follows a similar structure to the widely used Metroplis-Hastings algorithm. Let's briefly review it and identify the weak points. 
-```julia
-for i in 1:Number of iterations 
-	θₚ ~ N(θ, Σ)		#Draw a proposal sample
-	r = α(θ, θₚ)		#Calculate the acceptance probability based on a likelihood ratio
-	if r ≥ 1 			#Accept if your new proposal increases your likelihood
-		θ = θₚ 
-	else 				#Else, accept relative to some probaility corresponding to a standard normal 
-		x = N(0,1)
-		if r > x
-			θ = θₚ
-		else
-			reject θₚ
-```
-Particular deficiencies stem from the very first step, drawing a proposal, θₚ. Namely, we are exploring posterior sapace in a mostly random way! 
-This is fine for small problems, but as dimensions increase and correlations between variables increase, the probability of making successful proposals drops significantly. 
-The main advantage of Hamiltonian Monte Carlo algorithms is that it generates samples that are very likely to be accepted by taking advantage of the geometry of posterior space.
-"
-
-# ╔═╡ b3152568-f1d1-4990-959b-5ab135e29d57
-md"## Hamiltonian Monte Carlo Algorithm 
-We can modify the algorithm to be the following: 
-Expand your paramter space two fold by introducing an auxilliary momentum parameters, $p$, and forming a joint density with $\theta$, $-\log\pi(\theta, p)$, and Hamiltonian, $\mathcal{H}(\theta, p)$. 
-Adding this structure allows us to make more informed proposal steps. 
-```julia
-for i in 1:Number of iterations 
-	pₚ ~ Normal(0, M)		#Sample a new p from proposal distribution with std M (the mass matrix)
-	θₚ <- H(θ, pₚ) 			#Generate a new θ by solving the Hamiltonian over time LΔ.
-	r = α((θ,p), (θₚ, pₚ)) 	#Calculate the acceptance probability given a likelihood ratio
-	if r ≥ 1 				#if the likelihood is increased, accept the new parameters 
-		(θ, p) = (θₚ, pₚ)
-	else 					#Else, accept relative to some probaility drawn from a uniform distribution  
-		x = U(0,1)
-		if r > x
-			θ = θₚ
-		else
-			reject θₚ
-	
-```
-"
-
 # ╔═╡ f07caceb-559e-4e76-b52c-890290efa64e
 md"# Show me the Results! 
 'Pavan, have you actually done any *real* work?'"
@@ -409,22 +346,17 @@ end;
 md"## Results
 We sample using NUTS, a form of Hamiltonian Monte Carlo. The distributions for the diffusion coefficient, $\rho$, indicate a *very* slow rate of diffusion, on the order of mm/year, across all subjects. There is more variation in the individual posteriors for growth rate $\alpha$, suggesting that it may be the more important driver of disease pathology."
 
-# ╔═╡ 04464d64-fb37-4106-8322-0cbbec21f07a
-begin
-	fig = plot(chain_vector[1][:k], seriestype = :density, labels=false, color=:white, size=(400,300))
-	for i in 1:78
-		plot!(fig, chain_vector[i][:k], seriestype = :density, labels=false, color=:blue, alpha=0.2, linewidth=1)
-	end
-	title!("Diffusion coefficient")
-	
-	fig_a = plot(chain_vector[1][:a], seriestype = :density, labels=false, color=:white, size=(400,300))
-	for i in 1:78
-		plot!(fig_a, chain_vector[i][:a], seriestype = :density, labels=false, color=:red, alpha=0.3, linewidth=1)
-	end
-	title!("Growth Rate")
-	fig_a
-	two_cols(fig, fig_a)
-end
+# ╔═╡ 403886c8-ece8-45cc-a086-f2424665c704
+md"### Diffusion"
+
+# ╔═╡ 99976a74-fe57-4474-947a-fed3853da11d
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/diffusion-chain.png"; h=200, w=900)
+
+# ╔═╡ 9bef967a-f058-4c73-9e27-0e35b87b0762
+md"### Growth"
+
+# ╔═╡ c7b9ce4f-d1f7-4f10-a001-895088b7bce6
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/growth-chain.png"; h=200, w=900)
 
 # ╔═╡ 1c86e2f4-bed6-4327-b977-6d732c57dd81
 md"## Projecting Uncertainty Forward
@@ -502,8 +434,8 @@ md"## A More Complex Model"
 
 # ╔═╡ b8714b83-8615-4533-92c8-baa489c25ad0
 html"""
-<img src="https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/results/subject36-81-fullposterior.png?raw=true" height=250 width=800>
-<img src="https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/results/subject36-u0.png?raw=true" height=250 width=800>
+<img src="https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-81-fullposterior.png?raw=true" height=250 width=800>
+<img src="https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-u0.png?raw=true" height=250 width=800>
 """
 
 # ╔═╡ 6a6843fe-72b3-4a05-9176-ba9c434e676d
@@ -2955,13 +2887,13 @@ version = "0.9.1+5"
 # ╠═18225564-8512-4fca-87c8-a95ec2fa0d05
 # ╠═8d93f866-2a10-4489-a1d4-1ac1da97f248
 # ╠═c1e20410-aed5-48a4-8f02-d78f957c15f0
-# ╠═4ff67e50-ccdd-479f-8280-e04ab2354ce4
+# ╟─4ff67e50-ccdd-479f-8280-e04ab2354ce4
 # ╟─abc58f7f-c4c1-47b6-861a-ab679d34bc95
 # ╟─95d6223a-c12e-4b26-8c4e-d59a59c7d129
 # ╟─d75eb4e7-2fbf-44ca-af86-bf67fc1d393d
 # ╟─a0cb7614-2ab3-44d1-9202-02f19915edf6
 # ╟─f45c2cd6-baf6-4ce3-84b0-5bf8fb9e67d4
-# ╟─703b4044-ab3f-4e6f-a567-ba41942abe72
+# ╟─70d3f5ff-aa7e-4cc3-8aca-db403a7de855
 # ╟─c484008a-ec30-4d73-bc6e-f462a5d187b1
 # ╟─a1e74c91-7f6a-4ca9-b497-151e2d5875c3
 # ╟─5a8dc4c9-246c-4dd1-ba62-638f0879d7b7
@@ -2973,7 +2905,7 @@ version = "0.9.1+5"
 # ╟─2967e74c-0f2b-4d7d-bc29-9c54c71cc242
 # ╟─8907ecbb-2127-40e3-a012-acd52dfb2508
 # ╟─16a92048-e476-4b68-a445-657025a28fcd
-# ╠═432b0862-c18c-444b-8b4c-385c0c3d0405
+# ╟─432b0862-c18c-444b-8b4c-385c0c3d0405
 # ╟─ade96765-12dd-4fe8-a4e7-be975304441d
 # ╟─ee429405-e34d-48b3-b93c-376d5eedd7ab
 # ╟─66d8ea22-9bf5-4362-90d5-71471e519bd5
@@ -2982,10 +2914,6 @@ version = "0.9.1+5"
 # ╟─b01363ae-65cb-4c9b-be74-05647e7196f5
 # ╟─5bb63831-fec0-4fdc-a5a1-bf285e91168d
 # ╟─677e9901-dd1e-4e2f-9bfe-666935342e73
-# ╟─cb865d40-3a15-469f-9a63-2c04a8840ca1
-# ╟─43daff92-8265-429e-af25-9b796b599825
-# ╟─6359cc18-634c-483c-8739-91ee80cf2dfe
-# ╟─b3152568-f1d1-4990-959b-5ab135e29d57
 # ╟─f07caceb-559e-4e76-b52c-890290efa64e
 # ╟─9066ba33-ddc3-4497-b896-393458faad92
 # ╟─358c91c1-cbd5-4802-a9d7-72a390a6b91b
@@ -2995,7 +2923,10 @@ version = "0.9.1+5"
 # ╟─96a18032-5d54-4d06-a00f-acdd4d4b25ed
 # ╟─95b23324-b326-4ef7-9031-9afb3cc92d7b
 # ╟─1488dec0-8e37-4e0c-84bb-3d4abcdebfd0
-# ╟─04464d64-fb37-4106-8322-0cbbec21f07a
+# ╟─403886c8-ece8-45cc-a086-f2424665c704
+# ╟─99976a74-fe57-4474-947a-fed3853da11d
+# ╟─9bef967a-f058-4c73-9e27-0e35b87b0762
+# ╟─c7b9ce4f-d1f7-4f10-a001-895088b7bce6
 # ╟─b8e8837e-345d-4539-aeb4-5d5575e08cdc
 # ╟─e48ce2b1-7c15-481c-97ad-5cb7d8ea4b54
 # ╟─1c86e2f4-bed6-4327-b977-6d732c57dd81
@@ -3003,7 +2934,7 @@ version = "0.9.1+5"
 # ╟─5acc04c0-ba56-4d07-b2b0-323596c8a420
 # ╟─b515a700-2ca8-4efc-b38f-32e63803b53d
 # ╟─8e7fb27c-80ab-421d-b631-b739dac80efd
-# ╠═b8714b83-8615-4533-92c8-baa489c25ad0
+# ╟─b8714b83-8615-4533-92c8-baa489c25ad0
 # ╟─6a6843fe-72b3-4a05-9176-ba9c434e676d
 # ╟─15409a15-c7fb-40bd-916c-a0d28123b030
 # ╟─9edae25e-1a41-4b9f-a01a-1f0afee68f0d

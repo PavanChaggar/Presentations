@@ -69,3 +69,9 @@ end
 function cite(citation)
 	@htl("""<p style="font-size:small"> $(citation)</p>""")
 end
+
+function pic(str::String; h=100, w=100, vspace=0, hspace=0)
+	@htl("""
+		<img src="$(str)?raw=true" height=$(h) width=$(w) vspace=$(vspace) hspace=$(hspace)>
+			""")
+end

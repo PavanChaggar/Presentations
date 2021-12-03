@@ -92,7 +92,7 @@ In most AD cases, τP follows a predictable pattern of spreading, starting in th
 
 
 # ╔═╡ 70d3f5ff-aa7e-4cc3-8aca-db403a7de855
-pic("https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/braak-stages.png"; h=300, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/braak-stages.png"; h=300, w=900)
 
 # ╔═╡ c484008a-ec30-4d73-bc6e-f462a5d187b1
 md" 
@@ -101,7 +101,7 @@ md"
 An important part of the modelling of $\tau$P in AD is describing transport. In this work, we do this using the graph Laplacian, a discrete counterpart to the Laplace operator used to describe diffusion in a continuous setting. The graph Laplacian is derived from a graph of brain connections, generated using tractography. "
 
 # ╔═╡ a1e74c91-7f6a-4ca9-b497-151e2d5875c3
-pic("https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/connectomes/connectome-pit.png"; h =300, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/connectomes/connectome-pit.png"; h =300, w=900)
 
 # ╔═╡ 5a8dc4c9-246c-4dd1-ba62-638f0879d7b7
 md" 
@@ -343,8 +343,11 @@ begin
 end;
 
 # ╔═╡ 1488dec0-8e37-4e0c-84bb-3d4abcdebfd0
-md"## Results
+md"# Single Subject Results
 We sample using NUTS, a form of Hamiltonian Monte Carlo. The distributions for the diffusion coefficient, $\rho$, indicate a *very* slow rate of diffusion, on the order of mm/year, across all subjects. There is more variation in the individual posteriors for growth rate $\alpha$, suggesting that it may be the more important driver of disease pathology."
+
+# ╔═╡ 5d9fc177-587c-4037-aa69-d946613fd677
+md"## Posterior Distributions" 
 
 # ╔═╡ 403886c8-ece8-45cc-a086-f2424665c704
 md"### Diffusion"
@@ -408,6 +411,26 @@ end;
 
 # ╔═╡ 78f4378e-6ddb-416f-9d66-4eae762ce8b0
 TwoColumn(p8, p7)
+
+# ╔═╡ 366907e2-a44e-465a-9b64-15e2ea636de3
+md"# Hierarchical Inference
+
+Can we use all of the available data from ADNI at the same time to group together information about dynamics? " 
+
+# ╔═╡ 48cc4be3-f6e9-459e-8305-454f1949e69c
+md" ## Posterior Distributions"
+
+# ╔═╡ 46520185-aa1e-4736-96be-0a13e00f8938
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-diffusion.png"; h=250, w=900)
+
+# ╔═╡ 98921efa-e07c-41f6-82ea-68c0a69b3b44
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-growth.png"; h=250, w=900)
+
+# ╔═╡ 08906542-caf1-4a2a-866f-70c57e0449c6
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-atrophy.png"; h=250, w=900)
+
+# ╔═╡ f4c3a622-019e-4faa-86db-d5688e4cd806
+md"## Defining a multilevel probabilistic model"
 
 # ╔═╡ b515a700-2ca8-4efc-b38f-32e63803b53d
 md"
@@ -2923,6 +2946,7 @@ version = "0.9.1+5"
 # ╟─96a18032-5d54-4d06-a00f-acdd4d4b25ed
 # ╟─95b23324-b326-4ef7-9031-9afb3cc92d7b
 # ╟─1488dec0-8e37-4e0c-84bb-3d4abcdebfd0
+# ╟─5d9fc177-587c-4037-aa69-d946613fd677
 # ╟─403886c8-ece8-45cc-a086-f2424665c704
 # ╟─99976a74-fe57-4474-947a-fed3853da11d
 # ╟─9bef967a-f058-4c73-9e27-0e35b87b0762
@@ -2932,6 +2956,12 @@ version = "0.9.1+5"
 # ╟─1c86e2f4-bed6-4327-b977-6d732c57dd81
 # ╟─78f4378e-6ddb-416f-9d66-4eae762ce8b0
 # ╟─5acc04c0-ba56-4d07-b2b0-323596c8a420
+# ╟─366907e2-a44e-465a-9b64-15e2ea636de3
+# ╟─48cc4be3-f6e9-459e-8305-454f1949e69c
+# ╟─46520185-aa1e-4736-96be-0a13e00f8938
+# ╟─98921efa-e07c-41f6-82ea-68c0a69b3b44
+# ╟─08906542-caf1-4a2a-866f-70c57e0449c6
+# ╟─f4c3a622-019e-4faa-86db-d5688e4cd806
 # ╟─b515a700-2ca8-4efc-b38f-32e63803b53d
 # ╟─8e7fb27c-80ab-421d-b631-b739dac80efd
 # ╟─b8714b83-8615-4533-92c8-baa489c25ad0

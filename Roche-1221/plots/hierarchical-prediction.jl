@@ -55,23 +55,23 @@ t_span = (0.0,30.0)
 problem = ODEProblem(NetworkFKPP, u0, t_span, p);
 sol = solve(problem, Tsit5(), saveat=0.1);
 
-sols = clamp.(simulate_sub(pos, problem, u0, [27]; N=1000), 0.0, 1.0)
+sols = clamp.(simulate_sub(pos, problem, u0, [81]; N=1000), 0.0, 1.0)
 q2 = [quantile(sols[i,:], 0.025) for i in 1:301]
 q9 = [quantile(sols[i,:], 0.975) for i in 1:301]
 
-hsols = clamp.(simulate_sub_h(hpos, problem, u0, hsub, [27]; N=1000), 0.0, 1.0)
+hsols = clamp.(simulate_sub_h(hpos, problem, u0, hsub, [81]; N=1000), 0.0, 1.0)
 hq2 = [quantile(hsols[i,:], 0.025) for i in 1:301]
 hq9 = [quantile(hsols[i,:], 0.975) for i in 1:301]
 
 # Plot prior_predictive_noise
 ax = Axis(f[:,2:3], xlabel = "Time / years", ylabel = "Concentration")
 plot_data!([0.0,1.0,2.0], suvr[:,1:3,36]; markersize=10.0, color=(:lightgrey,0.8), label="Data")
-plot_data!([0.0,1.0,2.0], suvr[:,1:3,36], 27; markersize=10.0, color=(:red,0.8), label="EC - Data")
+plot_data!([0.0,1.0,2.0], suvr[:,1:3,36], 81; markersize=10.0, color=(:red,0.8), label="EC - Data")
 band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.3), label="95% Interval")
-plot_predictive_mean!(pos, problem; nodes=[27], add_noise=false)
+plot_predictive_mean!(pos, problem; nodes=[81], add_noise=false)
 
 band!(collect(0:0.1:30), hq9, hq2, color=(:green, 0.3), label="95% Interval - Hierarchical")
-plot_predictive_mean_h!(hpos, problem; sub=hsub, nodes=[27], add_noise=false)
+plot_predictive_mean_h!(hpos, problem; sub=hsub, nodes=[81], add_noise=false)
 axislegend(ax, merge = true, unique = true, position=:rb)
 f
 

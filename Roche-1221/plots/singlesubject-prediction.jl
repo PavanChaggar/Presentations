@@ -34,7 +34,7 @@ sol = solve(problem, Tsit5(), saveat=0.1);
 chain_path = "/Users/pavanchaggar/Projects/TauPet/chains/"
 p1 = deserialize(chain_path * "nuts/posteriorchain_36.jls");
 p2 = deserialize(chain_path * "nutsfull/posterior_36.jls");
-
+node = 81
 f = Figure(resolution = (1600,600), fontsize = 20)
 ax = Axis(f[1, 1])
 plot_density!(p1, :k; color=(:green, 0.5), bins=50, label="ρ")
@@ -46,25 +46,25 @@ plot_density!(p2, :a; color=(:darkblue, 0.9), bins=50, label="α - full")
 axislegend(ax, position = :rt)
 
 
-sols = clamp.(simulate_sub(p1, problem, u0, [27]; N=1000), 0.0, 1.0)
+sols = clamp.(simulate_sub(p1, problem, u0, [81]; N=1000), 0.0, 1.0)
 q2 = [quantile(sols[i,:], 0.025) for i in 1:301]
 q9 = [quantile(sols[i,:], 0.975) for i in 1:301]
 
 
-fsols = clamp.(simulate_sub(p2, problem, u0, [27]; N=1000), 0.0, 1.0)
+fsols = clamp.(simulate_sub(p2, problem, u0, [81]; N=1000), 0.0, 1.0)
 fq2 = [quantile(fsols[i,:], 0.025) for i in 1:301]
 fq9 = [quantile(fsols[i,:], 0.975) for i in 1:301]
 
 # Plot prior_predictive_noise
 ax = Axis(f[1:2,2:3], xlabel = "Time / years", ylabel = "Concentration")
 plot_data!([0.0,1.0,2.0], suvr[:,1:3,36]; markersize=10.0, color=(:lightgrey,0.8), label="Data")
-plot_data!([0.0,1.0,2.0], suvr[:,1:3,36], 27; markersize=10.0, color=(:red,0.8), label="EC - Data")
+plot_data!([0.0,1.0,2.0], suvr[:,1:3,36], 81; markersize=10.0, color=(:red,0.8), label="HC - Data")
 
 band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.2), label="95% Interval")
-plot_predictive_mean!(p1, problem; nodes=[27], add_noise=false)
+plot_predictive_mean!(p1, problem; nodes=[81], add_noise=false)
 
 band!(collect(0:0.1:30), fq9, fq2, color=(:green, 0.3), label="95% Interval -- full")
-plot_predictive_mean!(p2, problem; nodes=[27], add_noise=false, color=(:blue, 0.5), label="Mean Predicted - full")
+plot_predictive_mean!(p2, problem; nodes=[81], add_noise=false, color=(:blue, 0.5), label="Mean Predicted - full")
 axislegend(ax, merge = true, unique = true, position=:lt)
 
 f

@@ -447,6 +447,12 @@ md"# Hierarchical Inference
 
 Can we use all of the available data from ADNI at the same time to group together information about dynamics? " 
 
+# ╔═╡ 3fb86091-51cb-48ce-b5c9-bf94e1ae693c
+md" ## Defining the Hierarchical Model"
+
+# ╔═╡ 314c6df5-3a59-4a48-98e9-3fc2ed602565
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/hierarchical-plate.jpeg"; h=550, w=900)
+
 # ╔═╡ 48cc4be3-f6e9-459e-8305-454f1949e69c
 md" ## Posterior Distributions"
 
@@ -2964,6 +2970,8 @@ version = "0.9.1+5"
 # ╟─8e7fb27c-80ab-421d-b631-b739dac80efd
 # ╟─b8714b83-8615-4533-92c8-baa489c25ad0
 # ╟─366907e2-a44e-465a-9b64-15e2ea636de3
+# ╟─3fb86091-51cb-48ce-b5c9-bf94e1ae693c
+# ╟─314c6df5-3a59-4a48-98e9-3fc2ed602565
 # ╟─48cc4be3-f6e9-459e-8305-454f1949e69c
 # ╟─46520185-aa1e-4736-96be-0a13e00f8938
 # ╟─98921efa-e07c-41f6-82ea-68c0a69b3b44

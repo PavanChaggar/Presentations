@@ -385,8 +385,7 @@ begin
 	
 	p8 = plot(xlims=(0,20), ylims=(0,1), size=(500,350))	
 	reltime1 = tₛ[sub1,t_index[sub1,:]] .- minimum(tₛ[sub1,t_index[sub1,:]])
-	scatter!(reltime1, suvr[:,t_index[sub1,:],sub1]', label=false, color=:grey)
-	scatter!(reltime1, suvr[[81],t_index[sub1,:],sub1]', label=false, color=:red)
+
 	for i in 1:100
 		n = rand(1:1000)
 		prob = remake(probpost, p=[ks[n], as[n]])
@@ -400,6 +399,8 @@ begin
 	xlabel!("Time")
 	ylabel!("Protein Concentration")
 #	scatter!(reltime1, suvr[node,:,sub1], legend = false)
+	scatter!(reltime1, suvr[:,t_index[sub1,:],sub1]', label=false, color=:grey)
+	scatter!(reltime1, suvr[[81],t_index[sub1,:],sub1]', label=false, color=:red)
 end;
 
 # ╔═╡ e48ce2b1-7c15-481c-97ad-5cb7d8ea4b54

@@ -38,11 +38,11 @@ p2 = deserialize(chain_path * "nutsfull/posterior_36.jls");
 f = Figure(resolution = (1600,600), fontsize = 20)
 ax = Axis(f[1, 1])
 plot_density!(p1, :k; color=(:green, 0.5), bins=50, label="ρ")
-plot_density!(p2, :k; color=(:darkgreen, 0.9), bins=50, label="ρ - hierarchical")
+plot_density!(p2, :k; color=(:darkgreen, 0.9), bins=50, label="ρ - full")
 axislegend(ax, position = :rt)
 ax = Axis(f[2, 1])
 plot_density!(p1, :a; color=(:blue, 0.5), bins=50, label="α")
-plot_density!(p2, :a; color=(:darkblue, 0.9), bins=50, label="α - hierarchical")
+plot_density!(p2, :a; color=(:darkblue, 0.9), bins=50, label="α - full")
 axislegend(ax, position = :rt)
 
 
@@ -60,8 +60,9 @@ ax = Axis(f[1:2,2:3], xlabel = "Time / years", ylabel = "Concentration")
 band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.2), label="95% Intervel")
 plot_predictive_mean!(p1, problem; nodes=[27], add_noise=false)
 
-band!(collect(0:0.1:30), fq9, fq2, color=(:green, 0.3), label="95% Intervel")
-plot_predictive_mean!(p2, problem; nodes=[27], add_noise=false, color=(:blue, 0.5))
+band!(collect(0:0.1:30), fq9, fq2, color=(:green, 0.3), label="95% Intervel -- full")
+plot_predictive_mean!(p2, problem; nodes=[27], add_noise=false, color=(:blue, 0.5), label="Mean Predicted - full")
+axislegend(ax, merge = true, unique = true, position=:rb)
 
 f
 

@@ -92,16 +92,16 @@ function plot_predictive!(chain, prob, data, data_t, n=100; nodes=[27], plot_tru
     plot_data!(data_t, data, nodes; markersize=10.0, color=(:red,0.8), label="Generated Data")
 end
 
-function plot_predictive_mean!(chain, prob; nodes=[27], add_noise=true, color=(:red, 0.5))
+function plot_predictive_mean!(chain, prob; nodes=[27], add_noise=true, color=(:red, 0.5), label="Mean Predicted")
     means = mean(chain)
     κ, α, σ = means[:k, :mean], means[:a, :mean], means[:σ, :mean]
     prob = remake(prob, p = [κ, α])
     sol2 = solve(prob, Tsit5(), saveat=0.1)
     if add_noise
         soln = clamp.(sol2 .+ rand(Normal(0.0, σ), size(sol2)), 0.0,1.0)
-        plot_sol_t!(sol2.t, soln, nodes, color, 2.0, "Mean Predicted")
+        plot_sol_t!(sol2.t, soln, nodes, color, 2.0, label)
     else
-        plot_sol!(sol2, nodes, color, 2.0, "Predicted")
+        plot_sol!(sol2, nodes, color, 2.0, label)
     end
 end
 

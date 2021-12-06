@@ -28,8 +28,8 @@ function NetworkFKPP(du, u, p, t; L = c.L)
     du .= -p[1] * L * u .+ p[2] .* u .* (1 .- u)
 end
 
-subject = 19
-hsub = 10
+subject = 36
+hsub = 21
 # Plot Dists 
 chain_path = "/Users/pavanchaggar/Projects/TauPet/chains/nuts/"
 pos = deserialize(chain_path * "posteriorchain_$(subject).jls");

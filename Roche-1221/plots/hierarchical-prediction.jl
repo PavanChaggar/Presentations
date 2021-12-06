@@ -65,13 +65,12 @@ hq9 = [quantile(hsols[i,:], 0.975) for i in 1:301]
 
 # Plot prior_predictive_noise
 ax = Axis(f[:,2:3], xlabel = "Time / years", ylabel = "Concentration")
-band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.3), label="95% Intervel")
+band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.3), label="95% Interval")
 plot_predictive_mean!(pos, problem; nodes=[27], add_noise=false)
 
-band!(collect(0:0.1:30), hq9, hq2, color=(:green, 0.3), label="95% Intervel - Hierarchical")
+band!(collect(0:0.1:30), hq9, hq2, color=(:green, 0.3), label="95% Interval - Hierarchical")
 plot_predictive_mean_h!(hpos, problem; sub=hsub, nodes=[27], add_noise=false)
 axislegend(ax, merge = true, unique = true, position=:rb)
-
 f
 
 save("assets/images/results/subject36-pos-v-hpos.png", f)

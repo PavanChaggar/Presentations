@@ -437,7 +437,7 @@ md"## A More Complex Model"
 
 # ╔═╡ b8714b83-8615-4533-92c8-baa489c25ad0
 html"""
-<img src="https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject-36-posterior.png?raw=true" height=250 width=800>
+<img src="https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject-36-fullposterior.png?raw=true" height=250 width=800>
 <img src="https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-u0.png?raw=true" height=250 width=800>
 """
 

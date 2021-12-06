@@ -134,6 +134,23 @@ function simulate_sub(c, prob, init, nodes; N=10, samples=1000)
     dropdims(meanval, dims=1)
 end
 
+function simulate_sub_f(c, prob, init, nodes; N=10, samples=1000)
+    σ = c[:σ]
+
+    ρ, α = c[:k], c[:a]
+    prob1 = remake(prob, u0=init, p = [ρ[1], α[1]])
+    sol = solve(prob1, Tsit5(), saveat=0.1)
+    sols = Array{Float64}(undef, size(sol)[1], size(sol)[2], N)
+    for (i, j) in enumerate(shuffle(rand(1:samples, N)))
+        u = get_u0(c, j)
+        prob1 = remake(prob, u0=u, p = [ρ[j], α[j]])
+        sol = Array(solve(prob1, Tsit5(), saveat=0.1))
+        sols[:,:,i] .= (sol .+ randn(size(sol)) .* σ[j])
+    end
+    meanval = mean(sols[nodes, :, :] , dims=1)
+    dropdims(meanval, dims=1)
+end
+
 function simulate_sub_h(c, prob, init, sub, nodes; N=10)
     σ = c[:σ]
 

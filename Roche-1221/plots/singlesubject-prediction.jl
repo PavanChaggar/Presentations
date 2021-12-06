@@ -51,7 +51,7 @@ q2 = [quantile(sols[i,:], 0.025) for i in 1:301]
 q9 = [quantile(sols[i,:], 0.975) for i in 1:301]
 
 
-fsols = clamp.(simulate_sub(p2, problem, u0, [81]; N=1000), 0.0, 1.0)
+fsols = clamp.(simulate_sub_f(p2, problem, u0, [81]; N=1000), 0.0, 1.0)
 fq2 = [quantile(fsols[i,:], 0.025) for i in 1:301]
 fq9 = [quantile(fsols[i,:], 0.975) for i in 1:301]
 

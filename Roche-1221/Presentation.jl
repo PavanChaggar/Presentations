@@ -461,7 +461,7 @@ pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets
 # ╔═╡ 2e3c459e-2e48-4706-8e80-8846cdce8a5f
 md"## Predictions: Hierarchical vs Individual Inference"
 
-# ╔═╡ 1a82abd8-830a-47a1-8c92-1bfa5c7836ef
+# ╔═╡ 90f982da-9dd9-47bb-892c-7f9dd0ab1779
 pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-pos-v-hpos.png"; h=300, w=900)
 
 # ╔═╡ 6a6843fe-72b3-4a05-9176-ba9c434e676d
@@ -2968,7 +2968,7 @@ version = "0.9.1+5"
 # ╟─98921efa-e07c-41f6-82ea-68c0a69b3b44
 # ╟─08906542-caf1-4a2a-866f-70c57e0449c6
 # ╟─2e3c459e-2e48-4706-8e80-8846cdce8a5f
-# ╟─1a82abd8-830a-47a1-8c92-1bfa5c7836ef
+# ╟─90f982da-9dd9-47bb-892c-7f9dd0ab1779
 # ╟─6a6843fe-72b3-4a05-9176-ba9c434e676d
 # ╟─15409a15-c7fb-40bd-916c-a0d28123b030
 # ╟─9edae25e-1a41-4b9f-a01a-1f0afee68f0d

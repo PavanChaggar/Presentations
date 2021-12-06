@@ -57,13 +57,13 @@ fq9 = [quantile(fsols[i,:], 0.975) for i in 1:301]
 
 # Plot prior_predictive_noise
 ax = Axis(f[1:2,2:3], xlabel = "Time / years", ylabel = "Concentration")
-band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.2), label="95% Intervel")
+band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.2), label="95% Interval")
 plot_predictive_mean!(p1, problem; nodes=[27], add_noise=false)
 
-band!(collect(0:0.1:30), fq9, fq2, color=(:green, 0.3), label="95% Intervel -- full")
+band!(collect(0:0.1:30), fq9, fq2, color=(:green, 0.3), label="95% Interval -- full")
 plot_predictive_mean!(p2, problem; nodes=[27], add_noise=false, color=(:blue, 0.5), label="Mean Predicted - full")
-axislegend(ax, merge = true, unique = true, position=:rb)
+axislegend(ax, merge = true, unique = true, position=:lt)
 
 f
 
-save("assets/images/results/subject-36-posterior.png", f)
+save("assets/images/results/subject-36-fullposterior.png", f)

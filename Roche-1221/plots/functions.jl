@@ -118,6 +118,22 @@ function plot_predictive_mean_h!(chain, prob; sub=1, nodes=[27], add_noise=true)
     end
 end
 
+function plot_predictive_mean_a!(chain, prob; sub=1, nodes=[27], add_noise=false, color=(:red, 0.5))
+    means = mean(chain)
+    κ, α, β = means[Symbol("k[$sub]"), :mean], means[Symbol("a[$sub]"), :mean], means[Symbol("b[$sub]"), :mean]
+    σ_t, σ_a = means[Symbol("σ_t[$sub]")], means[Symbol("σ_a[$sub]")]
+    
+    prob = remake(prob, p = [κ, α, β])
+    sol2 = solve(prob, Tsit5(), saveat=0.1)
+    if add_noise
+        soln = clamp.(sol2 .+ rand(Normal(0.0, σ), size(sol2)), 0.0,1.0)
+        plot_sol_t!(sol2.t, soln, nodes, color, 2.0, "Mean Predicted")
+    else
+        plot_sol!(sol2, nodes, color, 2.0, "Mean Predicted")
+    end
+end
+
+
 function simulate_sub(c, prob, init, nodes; N=10, samples=1000)
     σ = c[:σ]
 
@@ -132,6 +148,26 @@ function simulate_sub(c, prob, init, nodes; N=10, samples=1000)
     end
     meanval = mean(sols[nodes, :, :] , dims=1)
     dropdims(meanval, dims=1)
+end
+
+
+function simulate_sub_a(c, prob, init, sub, nodes; N=10)
+    σ_t, σ_a = c[Symbol("σ_t[$(sub)]")], c[Symbol("σ_a[$(sub)]")]
+
+    ρ, α, β = c[Symbol("k[$sub]")], c[Symbol("a[$sub]")], c[Symbol("b[$sub]")]
+    prob1 = remake(prob, u0=init, p = [ρ[1], α[1], β[1]])
+    sol = solve(prob1, Tsit5(), saveat=0.1)
+    sols = Array{Float64}(undef, size(sol)[1], size(sol)[2], N)
+    for (i, j) in enumerate(shuffle(rand(1:2000, N)))
+        prob1 = remake(prob, u0=init, p = [ρ[j], α[j], β[j]])
+        sol = Array(solve(prob1, Tsit5(), saveat=0.1))
+        sols[1:83,:,i] .= sol[1:83,:] .+ (randn(size(sol[1:83,:])) .* σ_t[j])
+        sols[84:end,:,i] .= sol[84:end,:] .+ (randn(size(sol[84:end,:])) .* σ_a[j])
+
+    end
+    meantau = mean(sols[nodes, :, :] , dims=1)
+    meanatr = mean(sols[nodes.+83, :, :] , dims=1)
+    dropdims(meantau, dims=1), dropdims(meanatr, dims=1)
 end
 
 function simulate_sub_f(c, prob, init, nodes; N=10, samples=1000)

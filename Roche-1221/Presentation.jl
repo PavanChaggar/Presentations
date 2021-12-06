@@ -445,10 +445,23 @@ html"""
 # ╔═╡ 366907e2-a44e-465a-9b64-15e2ea636de3
 md"# Hierarchical Inference
 
-Can we use all of the available data from ADNI at the same time to group together information about dynamics? " 
+Can we use all of the available data from ADNI at the same time to group together information about dynamics? 
+
+Yes!
+
+To maximise the amount of data we have in the model, we use a coupled model of protein dynamics with atrophy. Additionally, we seperate ADNI data into groups based whether subjects are $A\beta^{+}$ or $A\beta^{-}$.
+>```math
+>\begin{align}
+>\frac{d p_i}{dt} &= -\rho\sum\limits_{j=1}^{N}L_{ij}p_j + \alpha p_i\left(1-p_i\right) \\
+>\frac{dq_i}{dt} &= \beta p_i( 1 - q_i ),
+>\end{align}
+>```" 
 
 # ╔═╡ 3fb86091-51cb-48ce-b5c9-bf94e1ae693c
-md" ## Defining the Hierarchical Model"
+md" ## Defining the Hierarchical Model
+
+Shown here is a *plate diagram* that shows the model structure we assume for the hierarchical model
+"
 
 # ╔═╡ 314c6df5-3a59-4a48-98e9-3fc2ed602565
 pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/hierarchical-plate.jpeg"; h=550, w=900)
@@ -470,36 +483,6 @@ md"## Predictions: Hierarchical vs Individual Inference"
 
 # ╔═╡ 90f982da-9dd9-47bb-892c-7f9dd0ab1779
 pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-pos-v-hpos.png"; h=300, w=900)
-
-# ╔═╡ 6a6843fe-72b3-4a05-9176-ba9c434e676d
-md" 
-## Utilising Multimodal Data
-
-We could also use multimodal data, to take complete advantage of the data available through open source repositories. Using structural MRI data, we can inference atrophy dynamics, using a simple logistic model fo atrophy that depends on protein concentration. 
-An atrophy model is given by: 
-
-$$\frac{dq_i}{dt} = G_c p_i( 1 - q_i ),$$
-
-which is coupled to a FKPP model of protein dynamics. We have the following priors:
-
-```math
-\begin{align}
-    \sigma_t &\sim \Gamma^{-1}(2, 3) \\
-    \sigma_a &\sim \Gamma^{-1}(2, 3) \\
-    \rho &\sim \mathcal{N}^{+}(0, 10) \\
-    \alpha &\sim \mathcal{N}(0, 10)  \\
-    G_c &\sim \mathcal{N}(0, 10)
-\end{align}
-```
-"
-
-# ╔═╡ 15409a15-c7fb-40bd-916c-a0d28123b030
-md" 
-## Utilising Multimodal Data"
-
-# ╔═╡ 9edae25e-1a41-4b9f-a01a-1f0afee68f0d
-html"""
-<img src=https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/atrophy/post_pred_mod1_4subs.png?raw=true" height=400 width=500 hspace=200>"""
 
 # ╔═╡ 65748ba6-52bf-442f-bb1e-ecaabbd7c909
 cite("Schäfer, A., Chaggar, P., Thompson T.B., Goriely, A., Kuhl, E,. Alzheimer’s Disease Neuroimaging Initiative, 2021. Predicting brain atrophy from tau pathology: A summary of clinical findings and their translation into personalized models. Submitted to Brain Multiphysics.")
@@ -2929,7 +2912,7 @@ version = "0.9.1+5"
 # ╟─70d3f5ff-aa7e-4cc3-8aca-db403a7de855
 # ╟─c484008a-ec30-4d73-bc6e-f462a5d187b1
 # ╟─a1e74c91-7f6a-4ca9-b497-151e2d5875c3
-# ╠═5a8dc4c9-246c-4dd1-ba62-638f0879d7b7
+# ╟─5a8dc4c9-246c-4dd1-ba62-638f0879d7b7
 # ╟─9eaf7995-f369-4a8b-970f-9ba73127052b
 # ╟─22f603d3-86ba-41f2-a4cc-8d4cb97f1511
 # ╟─0b40960b-4114-4357-a99d-b8389fe46835
@@ -2978,9 +2961,6 @@ version = "0.9.1+5"
 # ╟─08906542-caf1-4a2a-866f-70c57e0449c6
 # ╟─2e3c459e-2e48-4706-8e80-8846cdce8a5f
 # ╟─90f982da-9dd9-47bb-892c-7f9dd0ab1779
-# ╟─6a6843fe-72b3-4a05-9176-ba9c434e676d
-# ╟─15409a15-c7fb-40bd-916c-a0d28123b030
-# ╟─9edae25e-1a41-4b9f-a01a-1f0afee68f0d
 # ╟─65748ba6-52bf-442f-bb1e-ecaabbd7c909
 # ╟─e8f4c7a4-970b-40bf-b9aa-b1bad49888c2
 # ╟─2c2a58ff-e916-495f-bc96-a0530392a273

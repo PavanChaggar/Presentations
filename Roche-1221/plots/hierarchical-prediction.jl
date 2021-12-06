@@ -65,6 +65,8 @@ hq9 = [quantile(hsols[i,:], 0.975) for i in 1:301]
 
 # Plot prior_predictive_noise
 ax = Axis(f[:,2:3], xlabel = "Time / years", ylabel = "Concentration")
+plot_data!([0.0,1.0,2.0], suvr[:,1:3,36]; markersize=10.0, color=(:lightgrey,0.8), label="Data")
+plot_data!([0.0,1.0,2.0], suvr[:,1:3,36], 27; markersize=10.0, color=(:red,0.8), label="EC - Data")
 band!(collect(0:0.1:30), q9, q2, color=(:grey, 0.3), label="95% Interval")
 plot_predictive_mean!(pos, problem; nodes=[27], add_noise=false)
 

@@ -30,7 +30,7 @@ begin
 end
 
 # ╔═╡ c1e20410-aed5-48a4-8f02-d78f957c15f0
-include("functions.jl")
+include("functions.jl");
 
 # ╔═╡ 5a0591b7-1a34-4e3e-9862-c772fc3159f4
 html"""<style>
@@ -39,13 +39,15 @@ max-width: 900px;
 }"""
 
 # ╔═╡ 18225564-8512-4fca-87c8-a95ec2fa0d05
-html"<button onclick='present()'>present</button>"
+html"<button onclick='present()'>present</button>";
 
 # ╔═╡ 4ff67e50-ccdd-479f-8280-e04ab2354ce4
 md" 
 # Mathematical Modelling and Inference Methods for Alzheimer's Disease
 
-**Pavanjit Chaggar, December 2021**
+**Pavanjit Chaggar, December 2021** \
+pavanjit.chaggar@maths.ox.ac.uk \
+@ChaggarPavan on Twitter
 
 DPhil student at the Mathematical Institute.
 Supervised by Alain Goriely and Saad Jbabdi, with support from Stefano Magon and Gregory Klein at Roche.
@@ -58,7 +60,7 @@ md"
 - Alzheimer's disease (AD)
 - Mathematical models of AD
 - Inference Workflow
-- Preliminary results
+- Results
 "
 
 # ╔═╡ 95d6223a-c12e-4b26-8c4e-d59a59c7d129
@@ -78,13 +80,16 @@ For modelling, there are at least two important aspects of protein dynaimcs to c
 # ╔═╡ d75eb4e7-2fbf-44ca-af86-bf67fc1d393d
 md" 
 ## A Pernicious Pair of Predictable Prion Proteins
-Both Aβ and τP grow via an autocatalytic process resembling those displayed by prions. 
-This process is summarised as: 
+Both Aβ and τP grow via an autocatalytic process resembling that displayed by prions. 
+This process can be summarised as: 
 "
 
 # ╔═╡ a0cb7614-2ab3-44d1-9202-02f19915edf6
 html"""
 <img src="https://github.com/PavanChaggar/TransferPresentation/blob/main/assets/images/TransferImages/heterodimerkinetics.png?raw=true" height=250 width=500 vspace=50, hspace=175>"""
+
+# ╔═╡ c1e049b6-bd2c-402b-9de0-8b996ea812e2
+cite("Fornari, S., Schäfer, A., Jucker, M., Goriely, A. and Kuhl, E., 2019. Prion-like spreading of Alzheimer’s disease within the brain’s connectome. Journal of the Royal Society Interface, 16(159), p.20190356.")
 
 # ╔═╡ f45c2cd6-baf6-4ce3-84b0-5bf8fb9e67d4
 md"## Braak Stages of Tau protein
@@ -173,7 +178,7 @@ Using the graph Laplacian, we can define the network heat equation, which descri
 \
 $$\frac{d \mathbf{p}}{dt} = -\rho \mathbf{L} \mathbf{p}$$
 ", 	
-Plots.plot(simulate(problem1, ρ1), size=(450,300), labels=false, ylims=(0.0,0.5), xlims=(0.0,20.0), ylabel="Concentration"))
+Plots.plot(simulate(problem1, ρ1), size=(450,300), labels=false, ylims=(0.0,0.15), xlims=(0.0,20.0), ylabel="Concentration"))
 
 
 
@@ -190,16 +195,21 @@ md"
 We can describe this process with the following reaction-diffusion equations, where the rates $$k_{ij}$$ correspond to the rates above.
 >```math
 >\begin{align}
->\frac{dp_i}{dt} &=  -\kappa\sum\limits_{j=1}^{N}L_{ij}p_j +  k_0 &- k_1 p_i - k_{12}p_i \tilde{p}_i \\
->\frac{d\tilde{p}_i}{dt} &= -\tilde{\kappa}\sum\limits_{j=1}^{N}L_{ij}\tilde{p}_j &- \tilde{k}_1 \tilde{p}_i + k_{12}p_i\tilde{p}_i.
+>\frac{dp_i}{dt} &=  -\rho\sum\limits_{j=1}^{N}L_{ij}p_j +  k_0 &- k_1 p_i - k_{12}p_i \tilde{p}_i \\
+>\frac{d\tilde{p}_i}{dt} &= -\tilde{\rho}\sum\limits_{j=1}^{N}L_{ij}\tilde{p}_j &- \tilde{k}_1 \tilde{p}_i + k_{12}p_i\tilde{p}_i.
 >\end{align}
 >```"
 
+# ╔═╡ ec991630-d2bd-4440-b225-dd586d7e4af2
+cite("Fornari, S., Schäfer, A., Jucker, M., Goriely, A. and Kuhl, E., 2019. Prion-like spreading of Alzheimer’s disease within the brain’s connectome. Journal of the Royal Society Interface, 16(159), p.20190356.")
+
 # ╔═╡ 16a92048-e476-4b68-a445-657025a28fcd
-md" ## The FKPP Model"
+md" ## The FKPP Model
+
+We can also used a reduced model. Kinetically, this looks like:"
 
 # ╔═╡ 432b0862-c18c-444b-8b4c-385c0c3d0405
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/fkppkinetics.png"; h=150, w=300, vspace=10, hspace=290)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/fkppkinetics.png"; h=130, w=300, vspace=10, hspace=290)
 
 # ╔═╡ ade96765-12dd-4fe8-a4e7-be975304441d
 md"""
@@ -207,6 +217,9 @@ With an appropriate diffusion term, we arrive at:
 > $$\frac{d p_i}{dt} = -\rho\sum\limits_{j=1}^{N}L_{ij}p_j + \alpha p_i\left(1-p_i\right)$$
 
 """
+
+# ╔═╡ 008b5584-00c1-4016-866b-9884c37c37e4
+cite("Fornari, S., Schäfer, A., Jucker, M., Goriely, A. and Kuhl, E., 2019. Prion-like spreading of Alzheimer’s disease within the brain’s connectome. Journal of the Royal Society Interface, 16(159), p.20190356.")
 
 # ╔═╡ ee429405-e34d-48b3-b93c-376d5eedd7ab
 begin
@@ -259,7 +272,7 @@ md"## Inverse Problems using Bayesian Inference
 For observations $\mathbf{x} = x_{1:n}$ and latent variables  $\mathbf{\theta} = \theta_{1:m}$, we have a joint density
 $$p(\mathbf{x}, \mathbf{\theta})$$.
 
-To evalulate a particular hypothesis, we need to evaluate the posterior $p(\mathbf{\theta} \mid \mathbf{x})$. To do so, we first decompose the joint distribution:
+To investigate a particular hypothesis, we need to evaluate the posterior $p(\mathbf{\theta} \mid \mathbf{x})$. To do so, we first decompose the joint distribution:
 
 $$p(\mathbf{x}, \mathbf{\theta}) = p(\mathbf{x} \mid \mathbf{\theta})p(\mathbf{\theta}) = p(\mathbf{\theta} \mid \mathbf{x})p(\mathbf{x})$$
 
@@ -296,7 +309,7 @@ end;
 
 # ╔═╡ 7b020a5c-5657-41d3-bb34-cfc1df999494
 md"## Inference Methods for Patient Data
-Ultimately, for our dynamical systems $f(u_0, t; \theta, \mathbf{L})$, we want to infer likely values of $\theta$. The dynamical systems proposed earlier in the talk describe the flow of proteins on a network. Thus, we need data that is apprpriate for the model. 
+Ultimately, for our dynamical systems $f(u_0, t; \theta, \mathbf{L})$, we want to infer likely values of $\theta$. The dynamical systems proposed earlier in the talk describe the flow of proteins on a network and so we need data that is apprpriate for the model. 
 Fortunately, such data is available from the Alzheimer's Disease Neuroimaging Initiative (ADNI) in the form of Aβ and τP PET imaging."
 
 # ╔═╡ 63136cdf-8481-41b2-98c7-04c3d4e46778
@@ -353,13 +366,13 @@ md"## Posterior Distributions"
 md"### Diffusion"
 
 # ╔═╡ 99976a74-fe57-4474-947a-fed3853da11d
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/diffusion-chain.png"; h=200, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/diffusion-chain.png"; h=150, w=700, hspace=80)
 
 # ╔═╡ 9bef967a-f058-4c73-9e27-0e35b87b0762
 md"### Growth"
 
 # ╔═╡ c7b9ce4f-d1f7-4f10-a001-895088b7bce6
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/growth-chain.png"; h=200, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/growth-chain.png"; h=150, w=700, hspace=80)
 
 # ╔═╡ 1c86e2f4-bed6-4327-b977-6d732c57dd81
 md"## Projecting Uncertainty Forward
@@ -417,7 +430,7 @@ TwoColumn(p8, p7)
 md"
 ## A More Complex Model
 
-The probabilistic model we considered first is a simplification of the true generative process. Significantly, we ignore uncertainty about the initial conditions.
+The first probabilistic model we considered is a simplification of the true generative process. Significantly, we ignore uncertainty about the initial conditions.
 
 In the simple model, the initial conditions are assumed to be fixed at the value from the initial scan. However, since our model depends on the initial conditions, it should contain parametric uncertainty and therefore, we should include priors for the initial conditions.
 
@@ -426,7 +439,7 @@ In the simple model, the initial conditions are assumed to be fixed at the value
 \sigma &\sim \Gamma^{-1}(2, 3) \\
 \rho &\sim \mathcal{N}^{+}(0,10) \\
 \alpha &\sim \mathcal{N}(0,10) \\
-\mathbf{u_0} &\sim \mathcal{N}(\mathbf{x_0}, 5)
+\mathbf{u_0} &\sim \mathcal{N}(\mathbf{x_0}, 1, [0, 1])
 \end{align}
 ```
 
@@ -464,80 +477,62 @@ Shown here is a *plate diagram* that shows the model structure we assume for the
 "
 
 # ╔═╡ 314c6df5-3a59-4a48-98e9-3fc2ed602565
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/hierarchical-plate.jpeg"; h=550, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/hierarchical-plate.jpeg"; h=450, w=750, hspace=50)
 
 # ╔═╡ 48cc4be3-f6e9-459e-8305-454f1949e69c
 md" ## Posterior Distributions"
 
 # ╔═╡ 46520185-aa1e-4736-96be-0a13e00f8938
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-diffusion.png"; h=250, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-diffusion.png"; h=150, w=500, hspace=150)
 
 # ╔═╡ 98921efa-e07c-41f6-82ea-68c0a69b3b44
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-growth.png"; h=250, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-growth.png";  h=150, w=500, hspace=150)
 
 # ╔═╡ 08906542-caf1-4a2a-866f-70c57e0449c6
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-atrophy.png"; h=250, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/hierarchical-atrophy.png";  h=150, w=500, hspace=150)
 
 # ╔═╡ 2e3c459e-2e48-4706-8e80-8846cdce8a5f
 md"## Predictions: Hierarchical vs Individual Inference"
 
 # ╔═╡ 90f982da-9dd9-47bb-892c-7f9dd0ab1779
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-pos-v-hpos.png"; h=300, w=900)
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-pos-v-hpos.png"; h=300, w=900, vspace=75, hspace=10)
 
-# ╔═╡ 65748ba6-52bf-442f-bb1e-ecaabbd7c909
-cite("Schäfer, A., Chaggar, P., Thompson T.B., Goriely, A., Kuhl, E,. Alzheimer’s Disease Neuroimaging Initiative, 2021. Predicting brain atrophy from tau pathology: A summary of clinical findings and their translation into personalized models. Submitted to Brain Multiphysics.")
+# ╔═╡ 6298cddf-e0cf-40f9-b163-902fc1c8dc7b
+md"## Predictions: Protein Dynamics and Atrophy"
+
+# ╔═╡ 544f53b9-eae2-4585-abe7-98564b046749
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-1221/assets/images/results/subject36-hpos-atr.png"; h=400, w=900, vspace=20)
 
 # ╔═╡ e8f4c7a4-970b-40bf-b9aa-b1bad49888c2
 md"
-# Future Work
-Going forward, I will focus on three major themes: 
-* Applications of modelling and inference to AD
-* Developing a software pipeline for Bayesian inference 
-* Quantifying uncertainty associated with network topology
-"
+# Conclusion and Limitations
+* Mathematical models can provide insight into how AD pathology develops. 
+* Bayesian inference using ADNI data is possible and should be used to quantify uncertainty when calibrating models. 
+There are still some significant limitations with the approaches presented here. In particular:
+* Incomplete forward model. We need carrying capacties for each region.
+* Quantifying uncertainty associated with network topology"
 
-# ╔═╡ 2c2a58ff-e916-495f-bc96-a0530392a273
-md"
-## Applications of modelling and inference to AD 
+# ╔═╡ 99933236-d01d-44e7-96b0-e11d60985394
 
-I'm currently working on two collaborations: 
-1. **Collaboration with Ashish Raj, UCSF**
-Working on using Bayesian inference with sparsity priors to infer seeding locations. 
-2. **Collaboration with Ellen Kuhl, Stanford**
-Following our recent work together, we will continue to investigate the use of multimodal data. In particular, whether sMRI data alone can be used to infer protein dynamics as well as atrophy dynamics. Secondly, eschewing global parameters and determining whether regional parameters are identifiable. 
-"
-
-# ╔═╡ 48073ebb-3ed7-4f54-a6a2-b6201eb08f89
-md"
-## Software Pipeline
-
-For ongoing work, it will be important to have robust tools capable of reproducing simulation and inference results. Software should aim to make the following tasks easier: 
-* Solving differential equations on brain networks
-* Interfacing with tools such as FreeSurfer and SPM
-* Creating and running inference on probabilistic models
-
-## Investigating the Graph Laplacian
-
-In the thesis, I have not addressed the significance of uncertainty around the graph Laplacian. 
-
-Previous work has shown that network topology significantly affects the dynamics given by models of network pathology. 
-
-There is currently no concensus about whether some tractography procedures are more suitable than others for macroscale brain dynamical modelling.
-
-This introduces huge uncertainty into modelling process. Future work should assess: 1) whether estimated dynamical regimes are conserved across different connectomes. 2) quantifying uncertainty of the graph Laplacian by combining variational inference with random matrix theory.
-"
 
 # ╔═╡ c973adef-46eb-4ec6-a23d-1e9b0aad220a
 md"
 # Thank you!
 
 To my academic supervisors, Alain Goriely and Saad Jbabdi. And to my industrial supervisors, Stefano Magon and Gregory Klein at Roche.
+"
 
-With the help of my supervisors and collaborators, the work presented here has been included in three publications over the past year:
+# ╔═╡ 688d1ab0-d71e-4ed9-93ac-40795b9afa55
+md" # References
+Predicting brain atrophy from tau pathology: A summary of clinical findings and their translation into personalized models \
+A Schäfer, **P Chaggar**, TB Thompson, A Goriely, E Kuhl - Brain Multiphysics, 202 **Joint first author**
 
-* Thompson, T.B., **Chaggar, P**., Kuhl, E., Goriely, A. and Alzheimer’s Disease Neuroimaging Initiative, 2020. Protein-protein interactions in neurodegenerative diseases: a conspiracy theory. PLoS computational biology, 16(10), p.e1008267.
-* Putra, P., Thompson, T.B., **Chaggar, P**., Goriely, A., Alzheimer’s Disease Neuroimaging Initiative and Alzheimer’s Disease Neuroimaging Initiative, 2021. Braiding Braak and Braak: Staging patterns and model selection in network neurodegeneration. Network Neuroscience, pp.1-41.
-* Schäfer, A., **Chaggar, P**., Thompson T.B., Goriely, A., Kuhl, E,. Alzheimer’s Disease Neuroimaging Initiative, 2021. Predicting brain atrophy from tau pathology: A summary of clinical findings and their translation into personalized models. Submitted to Brain Multiphysics. **(Joint First Author)**"
+Braiding Braak and Braak: Staging patterns and model selection in network neurodegeneration \
+P Putra, TB Thompson, **P Chaggar**, A Goriely - Network Neuroscience, 2021
+ 
+Protein-protein interactions in neurodegenerative diseases: a conspiracy theory \
+TB Thompson, **P Chaggar**, E Kuhl, A Goriely… - PLoS computational biology, 2020
+"
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2899,15 +2894,16 @@ version = "0.9.1+5"
 """
 
 # ╔═╡ Cell order:
-# ╠═5a0591b7-1a34-4e3e-9862-c772fc3159f4
-# ╠═18225564-8512-4fca-87c8-a95ec2fa0d05
-# ╠═8d93f866-2a10-4489-a1d4-1ac1da97f248
-# ╠═c1e20410-aed5-48a4-8f02-d78f957c15f0
+# ╟─5a0591b7-1a34-4e3e-9862-c772fc3159f4
+# ╟─18225564-8512-4fca-87c8-a95ec2fa0d05
+# ╟─8d93f866-2a10-4489-a1d4-1ac1da97f248
+# ╟─c1e20410-aed5-48a4-8f02-d78f957c15f0
 # ╟─4ff67e50-ccdd-479f-8280-e04ab2354ce4
 # ╟─abc58f7f-c4c1-47b6-861a-ab679d34bc95
 # ╟─95d6223a-c12e-4b26-8c4e-d59a59c7d129
 # ╟─d75eb4e7-2fbf-44ca-af86-bf67fc1d393d
 # ╟─a0cb7614-2ab3-44d1-9202-02f19915edf6
+# ╟─c1e049b6-bd2c-402b-9de0-8b996ea812e2
 # ╟─f45c2cd6-baf6-4ce3-84b0-5bf8fb9e67d4
 # ╟─70d3f5ff-aa7e-4cc3-8aca-db403a7de855
 # ╟─c484008a-ec30-4d73-bc6e-f462a5d187b1
@@ -2920,9 +2916,11 @@ version = "0.9.1+5"
 # ╟─53811fc6-c78e-4439-8f8c-0a002d47371a
 # ╟─2967e74c-0f2b-4d7d-bc29-9c54c71cc242
 # ╟─8907ecbb-2127-40e3-a012-acd52dfb2508
+# ╟─ec991630-d2bd-4440-b225-dd586d7e4af2
 # ╟─16a92048-e476-4b68-a445-657025a28fcd
 # ╟─432b0862-c18c-444b-8b4c-385c0c3d0405
 # ╟─ade96765-12dd-4fe8-a4e7-be975304441d
+# ╟─008b5584-00c1-4016-866b-9884c37c37e4
 # ╟─ee429405-e34d-48b3-b93c-376d5eedd7ab
 # ╟─66d8ea22-9bf5-4362-90d5-71471e519bd5
 # ╟─703e9020-94de-493d-a15c-f11a684f0c95
@@ -2961,10 +2959,11 @@ version = "0.9.1+5"
 # ╟─08906542-caf1-4a2a-866f-70c57e0449c6
 # ╟─2e3c459e-2e48-4706-8e80-8846cdce8a5f
 # ╟─90f982da-9dd9-47bb-892c-7f9dd0ab1779
-# ╟─65748ba6-52bf-442f-bb1e-ecaabbd7c909
+# ╟─6298cddf-e0cf-40f9-b163-902fc1c8dc7b
+# ╟─544f53b9-eae2-4585-abe7-98564b046749
 # ╟─e8f4c7a4-970b-40bf-b9aa-b1bad49888c2
-# ╟─2c2a58ff-e916-495f-bc96-a0530392a273
-# ╟─48073ebb-3ed7-4f54-a6a2-b6201eb08f89
+# ╟─99933236-d01d-44e7-96b0-e11d60985394
 # ╟─c973adef-46eb-4ec6-a23d-1e9b0aad220a
+# ╟─688d1ab0-d71e-4ed9-93ac-40795b9afa55
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002

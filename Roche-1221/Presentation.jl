@@ -330,6 +330,18 @@ end;
 # ╔═╡ 6749c00c-38ef-4f5b-a446-f8e43d8dddb2
 TwoColumn(p3,p4)
 
+# ╔═╡ 7420dc62-5d68-464b-9e62-b9ae04a023e0
+begin
+	f = plot(age[subject,t_index[subject,:]], suvr[27,t_index[subject,:],subject], label=false, xlims=(min_age-5, max_age+5), ylims=(0.0,0.5), color=:red, size=(550,290))
+	for i in 1:78
+		plot!(age[i,t_index[i,:]], suvr[27,t_index[i,:],i], label=false, xlims=(min_age-5, max_age+5), ylims=(0.0,0.5), color=:red, size=(550,290))
+	end
+ 	f
+end
+
+# ╔═╡ 79485a67-b65b-41c5-bd82-def01355a0fc
+age[subject,t_index[subject,:]]
+
 # ╔═╡ 96a18032-5d54-4d06-a00f-acdd4d4b25ed
 md"## Defining a Probabalistic Model
 Now that we have data, we should want to fit a model to it using Bayesian inference. We assume the following model structure: 
@@ -2930,10 +2942,12 @@ version = "0.9.1+5"
 # ╟─677e9901-dd1e-4e2f-9bfe-666935342e73
 # ╟─f07caceb-559e-4e76-b52c-890290efa64e
 # ╟─9066ba33-ddc3-4497-b896-393458faad92
-# ╟─358c91c1-cbd5-4802-a9d7-72a390a6b91b
+# ╠═358c91c1-cbd5-4802-a9d7-72a390a6b91b
 # ╟─7b020a5c-5657-41d3-bb34-cfc1df999494
 # ╟─6749c00c-38ef-4f5b-a446-f8e43d8dddb2
 # ╟─63136cdf-8481-41b2-98c7-04c3d4e46778
+# ╠═7420dc62-5d68-464b-9e62-b9ae04a023e0
+# ╠═79485a67-b65b-41c5-bd82-def01355a0fc
 # ╟─96a18032-5d54-4d06-a00f-acdd4d4b25ed
 # ╟─95b23324-b326-4ef7-9031-9afb3cc92d7b
 # ╟─1488dec0-8e37-4e0c-84bb-3d4abcdebfd0

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>models.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="summary-of-models">Summary of Models</h1>
+<p>Propagation of misfolded proteins in time follows at least two broad
+mechanisms: transport and growth/decay.</p>
+<p>$
+\begin{align}
+\frac{dp_i}{dt} &amp;= \frac{\text{change in concentration at node i}}{\text{change in time}} \
+&amp;= \text{transport process} + \text{growth/decay process}
+\end{align}
+$</p>
+<p>where $\mathbf{i} = 1, 2, \dots N$, for N distinct brain regions. For the DKT atlast, $N = 83$.</p>
+<p>The network diffusion model (NDM) is a linear ordinary differential
+equation describing <strong>transport</strong> only:</p>
+<p>$
+\frac{d\mathbf{p}}{dt} = -\rho \mathbf{L}\mathbf{p}
+$</p>
+<p>where $\mathbf{L}$ is the graph Laplacian determined by the brains connectome. The graph Laplacian approximates the
+continuous Laplacian operator, $\Delta$, which is used to describe
+diffusion. Intuitively, you can think about it as applying the $L$
+operation to a particular set of connected nodes with different
+concentrations will change the value of the nodes such that they
+are closer to the average of their neighbors. The stationary point
+therefore, i.e. the point after which repeated application of $L$
+to $p$ have no effect, is when all nodes have the same value. That
+value is simply the mean concentration.</p>
+<p>This process <strong>conserves</strong> the total concentration of protein over
+time and so is an inadequate description of toxic protein dynamics
+over the time because it does not describe a growth process. Depending on
+disease stage, this may approximate the <em>true</em> model, but in general, does
+not describe diseae dynamics as we know them.</p>
+<p>The simplest expansion of the model to include growth is the FKPP model:</p>
+<p>$
+\frac{dp_i}{dt} = - \rho L_{ij}p_j + \alpha p_i ( 1 - p_i ).
+$</p>
+<p>The first term here, $\rho L_{ij}p_j$, is just the i-th component
+of the NDM. The second term, $ \alpha p_i ( 1 - p_i ) $, describes
+protein growth. Note that it is not simply $\alpha p_i$, which
+would entail exponential, <strong>unbounded</strong> growth. The quadratic term
+is necessary to provide a description of sigmoidal, <strong>bounded</strong>
+growth. This is the first justification for FKPP model. Secondly,
+it is a linearisation of the heterodimer kinetic model proposed by
+Pruisner (see report). Here, the $\alpha$ parameter bundles up lots
+of information and can be interpreted as a ratio of protein growth
+due to natural production and autocatalysis and natural clearance.
+Therefore, if $\alpha$ is negative, toxic protein concentration
+will <strong>decreaes</strong> toward 0, if it is positive, it will <strong>increase</strong>
+toward 1.</p>
+<p>Variations and expansions of these models aim to describe these
+processes in more detail. For example, the conspiracy model
+(Thompson et al., 2020), describes a mechanism for $\text{A}\beta$
+induced proliferation of tau, whereas the aggregation models in
+Fornari et al., 2019, describe an infinite dimensional
+reaction-diffusion process for oligomers of different sizes, the
+complexity of which prohibits robust analysis against data (for
+now, at least).</p>
+<h2 id="relation-to-esm-model">Relation to ESM model.</h2>
+<p>The ESM model is a bit hard to parse but hopefully I can elaborate on
+some of the similarites and differences. My interpretation of the ESM
+model is a much more complicated and less elegant version of FKPP. It has
+three terms that can be interpreted as:</p>
+<p>$$
+\frac{dP_i}{dt} = \text{(accumulation and growth process at i)} - \text{clearance at i} + \text{anything else}. \
+= ( 1 - P_i(t))\epsilon_i(t) - \delta_i(t)P_i(t) + \mathbf{N} \
+\epsilon_i(t) &amp;= P_A(j, i)\beta^E_i(t - \tau_{ij}) P_j(t - \tau_{ij}) + P_A(i, i)\beta^I_i(t)P_i(t)
+$$</p>
+<p>The first term is given by equation 2 in
+<a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003956#s4">Iturria-Medina et al., 2014</a>). This has
+two terms, the first essentially represents the diffusion process
+of the NDM model and the second represents a local <strong>unbounded</strong>
+growth process. You can think of the NDM model as a deterministic
+(i.e. not based on probabilities) version of this first diffusion
+term. Both are based on an anatomical connectome and weighted by
+some features of connections, e.g. length, number of connections,
+which modulate the time it takes for protein to go from region $i$
+to $j$. Next is the growth term, if you bundle this up with the
+clearance term, second part of equation 1 in the paper and equation 3),
+this describes the same process as the non-linear term in the FKPP model.</p>
+<p>The third term of equation 3 (equation 1 in the paper), is just
+additive noise, describing random fluctuations, parameterised by a
+Normal distribution with mean $\mu$ and s.d. $\sigma$. So, there
+are 4 parameters per region, ${\beta, \delta, \mu, \sigma}$.</p>
+<p>There are a few sources that add to the complexity of this model.
+First, this appears to be a non-autonomous system, i.e. the parameters
+depend on time. However, these arent parameterised in the paper and I
+believe are fitted based on individual time points. Secondly, each model parameter is regionally specific. So, if I understand
+that correctly, this means there are $4 \times \text{number of
+regions} \times \text{number of time points}$ parameters. Each of which is personalised to a particular subject, given a common seeding location. This is a huge number of parameters relative to the amount of data. In theory, before fitting a model, one should check the identifiability of parameters. My guess would be that this model would not be identifiable from data!</p>
+<p>The FKPP model is much simpler while still capturing the important mechanistic insights.</p>
+
+</body>
+</html>

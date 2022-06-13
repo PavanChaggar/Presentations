@@ -488,9 +488,9 @@ uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
 
 [[deps.FuzzyCompletions]]
 deps = ["REPL"]
-git-tree-sha1 = "efd6c064e15e92fcce436977c825d2117bf8ce76"
+git-tree-sha1 = "2cc2791b324e8ed387a91d7226d17be754e9de61"
 uuid = "fb4132e2-a121-4a70-b8a1-d5b831dcdcc2"
-version = "0.5.0"
+version = "0.4.3"
 
 [[deps.GLFW_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Libglvnd_jll", "Pkg", "Xorg_libXcursor_jll", "Xorg_libXi_jll", "Xorg_libXinerama_jll", "Xorg_libXrandr_jll"]
@@ -1002,11 +1002,6 @@ git-tree-sha1 = "5ea9a0aaf5ded7f0b6e43c96ca1793e60c96af93"
 uuid = "bdcacae8-1622-11e9-2a5c-532679323890"
 version = "0.12.118"
 
-[[deps.MIMEs]]
-git-tree-sha1 = "65f28ad4b594aebe22157d6fac869786a255b7eb"
-uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
-version = "0.1.4"
-
 [[deps.MKL_jll]]
 deps = ["Artifacts", "IntelOpenMP_jll", "JLLWrappers", "LazyArtifacts", "Libdl", "Pkg"]
 git-tree-sha1 = "e595b205efd49508358f7dc670a940c790204629"
@@ -1259,10 +1254,10 @@ uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 version = "1.25.9"
 
 [[deps.Pluto]]
-deps = ["Base64", "Configurations", "Dates", "Distributed", "FileWatching", "FuzzyCompletions", "HTTP", "HypertextLiteral", "InteractiveUtils", "Logging", "MIMEs", "Markdown", "MsgPack", "Pkg", "PrecompileSignatures", "REPL", "RelocatableFolders", "Sockets", "TOML", "Tables", "URIs", "UUIDs"]
-git-tree-sha1 = "1c340815f709cb59831ada9f6b273ebd56863177"
+deps = ["Base64", "Configurations", "Dates", "Distributed", "FileWatching", "FuzzyCompletions", "HTTP", "InteractiveUtils", "Logging", "Markdown", "MsgPack", "Pkg", "REPL", "Sockets", "TableIOInterface", "Tables", "UUIDs"]
+git-tree-sha1 = "a5b3fee95de0c0a324bab53a03911395936d15d9"
 uuid = "c3e4b0f8-55cb-11ea-2926-15256bba5781"
-version = "0.19.8"
+version = "0.17.2"
 
 [[deps.PlutoUI]]
 deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
@@ -1299,11 +1294,6 @@ deps = ["Adapt", "ArrayInterfaceCore", "ForwardDiff", "LabelledArrays"]
 git-tree-sha1 = "ae8a080dfc68e5615654591d8db5d53ac382353e"
 uuid = "d236fae5-4411-538c-8e31-a6e3d9e00b46"
 version = "0.3.1"
-
-[[deps.PrecompileSignatures]]
-git-tree-sha1 = "18ef344185f25ee9d51d80e179f8dad33dc48eb1"
-uuid = "91cefc8d-f054-46dc-8f8c-26e11d7c5411"
-version = "3.0.3"
 
 [[deps.Preferences]]
 deps = ["TOML"]
@@ -1409,12 +1399,6 @@ deps = ["IterTools", "LinearAlgebra", "StaticArrays"]
 git-tree-sha1 = "4618ed0da7a251c7f92e869ae1a19c74a7d2a7f9"
 uuid = "dee08c22-ab7f-5625-9660-a9af2021b33f"
 version = "0.3.2"
-
-[[deps.RelocatableFolders]]
-deps = ["SHA", "Scratch"]
-git-tree-sha1 = "22c5201127d7b243b9ee1de3b43c408879dff60f"
-uuid = "05181044-ff0b-4ac5-8273-598c1e38db00"
-version = "0.3.0"
 
 [[deps.Requires]]
 deps = ["UUIDs"]
@@ -1627,6 +1611,11 @@ version = "5.2.1+0"
 [[deps.TOML]]
 deps = ["Dates"]
 uuid = "fa267f1f-6049-4f14-aa54-33bafae1ed76"
+
+[[deps.TableIOInterface]]
+git-tree-sha1 = "9a0d3ab8afd14f33a35af7391491ff3104401a35"
+uuid = "d1efa939-5518-4425-949f-ab857e148477"
+version = "0.1.6"
 
 [[deps.TableTraits]]
 deps = ["IteratorInterfaceExtensions"]

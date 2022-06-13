@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.19.8
+# v0.17.2
 
 using Markdown
 using InteractiveUtils
@@ -46,6 +46,37 @@ c = filter(Connectome("/Users/pavanchaggar/.julia/dev/Connectomes/assets/connect
 
 # ╔═╡ 2aae6fa9-a3f0-451a-80dd-8b119f48072d
 const L = laplacian_matrix(c);
+
+# ╔═╡ e47c2a68-7865-48fd-ab1b-695a89bc113a
+SlideNextPrev() = @htl("""
+<script id="first">
+
+	var editor = document.querySelector("pluto-editor")
+	var prev = document.querySelector("button.changeslide.prev")
+	var next = document.querySelector("button.changeslide.next")
+	
+	const click_background = (e => {
+		// debugger;
+		if (editor != e.target) return;
+		e.preventDefault();		
+		console.log(e.button);
+		if (e.button === 2 && prev) {
+			prev.click();
+		} else if (e.button === 0 && next) {
+			next.click();
+		} 
+	})
+	editor.addEventListener("click", click_background)
+	editor.addEventListener("contextmenu", click_background)
+
+	invalidation.then(() => { 
+		editor.removeEventListener("click", click_background);
+		editor.removeEventListener("contextmenu", click_background);
+	})
+	
+	return true;
+</script>
+""")
 
 # ╔═╡ 2e3cfdf8-2c92-422f-917e-fc5c8b2a3451
 md"
@@ -190,10 +221,33 @@ two_cols(md"
 Ideally, we want to model SUVR values as opposed to dimensionless concentration. 
 
 We would also like to include regional characteristics, such as baseline SURV values and carrying capacities.
+
+We **estimate** these using Gaussian mixture modelling of cohort SUVR data per region. 
+
+This is likely subject to some sampling bias, but should provided a good estimate for short time courses
 ",
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-0622/assets/images/gmm-lEC.png"; h = 275, w=450))
+
+# ╔═╡ ece49802-e660-48fb-8592-f9a4098f10e8
 md"
+## Expanded FKPP Model"
+
+# ╔═╡ ef098338-1b67-4682-bd05-e4154e5a420f
+LocalResource("/Users/pavanchaggar/Projects/model-selection/exfkpp.mp4")
+
+# ╔═╡ d3a9829f-7ac4-4465-acb5-277d09cacce4
+md" 
+# Fitting to Subject Data
+'Ok, Pavan, you've shown off your models, now tell us how they're useful?'
 "
-)
+
+# ╔═╡ a582faef-85ac-4a51-ba4f-5bbf1e2e630f
+md" 
+## Single Subject Inference and Predictions
+"
+
+# ╔═╡ 5905156f-3fd2-4ab2-ac53-305eba364f03
+
 
 # ╔═╡ Cell order:
 # ╠═1f540848-eb08-11ec-32c6-d78736f8362e
@@ -203,6 +257,7 @@ md"
 # ╠═9b698c74-dbc7-4510-ae29-ead164bcf830
 # ╠═2aae6fa9-a3f0-451a-80dd-8b119f48072d
 # ╠═91107cb3-a72e-47a7-8d21-42b2ea11e521
+# ╠═e47c2a68-7865-48fd-ab1b-695a89bc113a
 # ╟─2e3cfdf8-2c92-422f-917e-fc5c8b2a3451
 # ╟─a828a333-df39-4a4a-8744-0c235fb4342e
 # ╟─5ff7a99d-0ea0-4919-8ffc-a41ab94984fe
@@ -223,4 +278,9 @@ md"
 # ╟─84f50b04-25d1-412e-bacf-5c0e9299eb63
 # ╟─607d0291-89f3-4d4e-bb53-cc4de43de049
 # ╟─57f7b7e2-ded0-4eac-87a4-2077b3522535
-# ╠═15fbec7e-ae2c-4ffe-86c4-b6b1beacdfb3
+# ╟─15fbec7e-ae2c-4ffe-86c4-b6b1beacdfb3
+# ╟─ece49802-e660-48fb-8592-f9a4098f10e8
+# ╟─ef098338-1b67-4682-bd05-e4154e5a420f
+# ╟─d3a9829f-7ac4-4465-acb5-277d09cacce4
+# ╠═a582faef-85ac-4a51-ba4f-5bbf1e2e630f
+# ╠═5905156f-3fd2-4ab2-ac53-305eba364f03

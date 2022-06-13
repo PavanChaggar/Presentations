@@ -247,6 +247,21 @@ md"
 "
 
 # ╔═╡ 5905156f-3fd2-4ab2-ac53-305eba364f03
+TwoColumn(
+	md"As a case study, we'll look at a single subject form the ADNI dataset.
+
+The subject is A$\beta^{+}$ with 4 tau-PET scans.", 
+	
+	pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-0622/assets/images/sub12/data.png"; h=350, w=900)
+)
+
+# ╔═╡ c8f0e855-181c-4efa-8f9a-c60ff1459002
+md"
+## Forward Simulations
+Make fig for forward simulations!
+"
+
+# ╔═╡ bcf42656-e38d-452f-b523-51732a7ccf6b
 
 
 # ╔═╡ Cell order:
@@ -282,5 +297,7 @@ md"
 # ╟─ece49802-e660-48fb-8592-f9a4098f10e8
 # ╟─ef098338-1b67-4682-bd05-e4154e5a420f
 # ╟─d3a9829f-7ac4-4465-acb5-277d09cacce4
-# ╠═a582faef-85ac-4a51-ba4f-5bbf1e2e630f
-# ╠═5905156f-3fd2-4ab2-ac53-305eba364f03
+# ╟─a582faef-85ac-4a51-ba4f-5bbf1e2e630f
+# ╟─5905156f-3fd2-4ab2-ac53-305eba364f03
+# ╟─c8f0e855-181c-4efa-8f9a-c60ff1459002
+# ╠═bcf42656-e38d-452f-b523-51732a7ccf6b

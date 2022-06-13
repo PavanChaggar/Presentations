@@ -47,37 +47,6 @@ c = filter(Connectome("/Users/pavanchaggar/.julia/dev/Connectomes/assets/connect
 # ╔═╡ 2aae6fa9-a3f0-451a-80dd-8b119f48072d
 const L = laplacian_matrix(c);
 
-# ╔═╡ e47c2a68-7865-48fd-ab1b-695a89bc113a
-SlideNextPrev() = @htl("""
-<script id="first">
-
-	var editor = document.querySelector("pluto-editor")
-	var prev = document.querySelector("button.changeslide.prev")
-	var next = document.querySelector("button.changeslide.next")
-	
-	const click_background = (e => {
-		// debugger;
-		if (editor != e.target) return;
-		e.preventDefault();		
-		console.log(e.button);
-		if (e.button === 2 && prev) {
-			prev.click();
-		} else if (e.button === 0 && next) {
-			next.click();
-		} 
-	})
-	editor.addEventListener("click", click_background)
-	editor.addEventListener("contextmenu", click_background)
-
-	invalidation.then(() => { 
-		editor.removeEventListener("click", click_background);
-		editor.removeEventListener("contextmenu", click_background);
-	})
-	
-	return true;
-</script>
-""")
-
 # ╔═╡ 2e3cfdf8-2c92-422f-917e-fc5c8b2a3451
 md"
 # Mathematical Modelling and Inference Methods for Alzheimer's Disease
@@ -261,8 +230,32 @@ md"
 Make fig for forward simulations!
 "
 
-# ╔═╡ bcf42656-e38d-452f-b523-51732a7ccf6b
+# ╔═╡ 3aa6c7f0-e034-41e8-be68-fd1fa2164053
+md"
+## Inference and Posterior Summaries
+"
 
+# ╔═╡ 78ae1e7f-9e12-47cd-899a-b8e1fa0c6ed5
+TwoColumn(
+md"
+* We use Bayesian inference to fit models to patient data. 
+* For each model, we infer the model parameters, initial conditions and observation noise. 
+* We use a NUTS sampler for efficient sampling
+
+
+* We can do model comparison using the AIC score:
+| Diffusion |  FKPP | Ex. FKPP |
+|-----------|-------|----------|
+|-57.41     |-355.81| -564.46  |
+
+", 
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-0622/assets/images/sub12/posteriorsummary.png"; h = 350, w=600)
+)
+
+# ╔═╡ af440978-f6f2-4a37-9af1-b9972a1240d2
+md" 
+##  Making Predictions...
+"
 
 # ╔═╡ Cell order:
 # ╠═1f540848-eb08-11ec-32c6-d78736f8362e
@@ -272,7 +265,6 @@ Make fig for forward simulations!
 # ╠═9b698c74-dbc7-4510-ae29-ead164bcf830
 # ╠═2aae6fa9-a3f0-451a-80dd-8b119f48072d
 # ╠═91107cb3-a72e-47a7-8d21-42b2ea11e521
-# ╠═e47c2a68-7865-48fd-ab1b-695a89bc113a
 # ╟─2e3cfdf8-2c92-422f-917e-fc5c8b2a3451
 # ╟─a828a333-df39-4a4a-8744-0c235fb4342e
 # ╟─5ff7a99d-0ea0-4919-8ffc-a41ab94984fe
@@ -300,4 +292,6 @@ Make fig for forward simulations!
 # ╟─a582faef-85ac-4a51-ba4f-5bbf1e2e630f
 # ╟─5905156f-3fd2-4ab2-ac53-305eba364f03
 # ╟─c8f0e855-181c-4efa-8f9a-c60ff1459002
-# ╠═bcf42656-e38d-452f-b523-51732a7ccf6b
+# ╟─3aa6c7f0-e034-41e8-be68-fd1fa2164053
+# ╟─78ae1e7f-9e12-47cd-899a-b8e1fa0c6ed5
+# ╟─af440978-f6f2-4a37-9af1-b9972a1240d2

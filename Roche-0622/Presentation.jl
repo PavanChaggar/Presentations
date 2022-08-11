@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.2
+# v0.19.11
 
 using Markdown
 using InteractiveUtils
@@ -55,7 +55,7 @@ md"
 pavanjit.chaggar@maths.ox.ac.uk \
 @ChaggarPavan on Twitter
 
-DPhil student at the Mathematical Institute.
+DPhil student at the Mathematical Institute, University of Oxford.
 Supervised by Alain Goriely, Saad Jbabdi, Stefano Magon and Gregory Klein.
 "
 
@@ -71,7 +71,7 @@ md"
 
 - Alzheimer's disease (AD)
 - Mathematical models of AD
-- Patient Inference
+- Patient Inference Case Study
 "
 
 # ╔═╡ 5ff7a99d-0ea0-4919-8ffc-a41ab94984fe
@@ -97,12 +97,12 @@ md"
 # Modelling on Brain Networks! 
 (The reason you keep me around.)
 
-We want to build up models, like lego. 
+We want to build up models like lego. 
 "
 
 # ╔═╡ b0618ecd-e43e-4378-b90b-5f480a601749
 md" 
-## Structural Connectomes 
+## Structural Connectomes and Transport
 "
 
 # ╔═╡ 5c30120e-7923-4891-8f7f-b086bbf7f3e6
@@ -143,10 +143,12 @@ two_cols(md"",md"
 # ╔═╡ 8309cc04-26a7-4896-bf83-76977c6dd28f
 TwoColumn(
 md"
-Using the graph Laplacian, we can define the network heat equation, which describes diffusion across a graph. To the left, I have shown a simulation with an initial seeding concentration placed in the entorhinal cortex. By changing the diffusion coefficient, $\rho$, we can see how the dynamics are affected.
+Using the graph Laplacian, we can define the network heat equation, which describes diffusion across a graph. 
+
+To the left, I have shown a simulation with an initial seeding concentration placed in the entorhinal cortex. By changing the diffusion coefficient, $\rho$, we can see how the dynamics are affected.
 \
 \
-$$\frac{dp_i}{dt} = \underbrace{-\rho L_{ij} p_j}_{transport}$$  
+$\frac{dp_i}{dt} = \underbrace{-\rho L_{ij} p_j}_{transport}$
 "
 ,     
 Plots.plot(simulate(prob_diffusion, ρ1), size=(450,300), labels=false, ylims=(0.0,0.5), xlims=(0.0,20.0), ylabel="Concentration")
@@ -156,7 +158,7 @@ Plots.plot(simulate(prob_diffusion, ρ1), size=(450,300), labels=false, ylims=(0
 md" ## Diffusion Model"
 
 # ╔═╡ 3af2f496-23b4-41fc-8072-69cf83b1d2fa
-LocalResource("/Users/pavanchaggar/Projects/model-selection/diffusion.mp4")
+LocalResource("/Users/pavanchaggar/Projects/model-selection/diffusion.mp4") 
 
 # ╔═╡ dd63aa8e-2ef9-4d18-8f2e-cda1a825efaa
 begin
@@ -206,7 +208,7 @@ Now we have transport and growth, the next piece we want to add is **regional sp
 
 We *estimate* these using Gaussian mixture modelling of population SUVR data per region.
 
-GMMs are fit to data from BioFinder, which has much better coverage of late stage AD subjects, which results in less sampling bias compared to ADNI.",
+GMMs are fit to data from BioFinder, which has much better coverage of late stage AD subjects than ADNI, resulting in less sampling bias.",
 	
 pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-0622/assets/images/gmm-lEC.png"; h = 275, w=450))
 
@@ -255,15 +257,18 @@ md"
 " 
 
 # ╔═╡ 78ae1e7f-9e12-47cd-899a-b8e1fa0c6ed5
-TwoColumn(
-pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-0622/assets/images/sub12/posteriorsummary.png"; h = 400, w=550), 
+two_cols(
+pic("https://github.com/PavanChaggar/Presentations/blob/master/Roche-0622/assets/images/sub12/posteriorsummary2.png"; h = 350, w=300), 
 md"
-We can do model comparison using the AIC score:
+We can also do model comparison using the AIC score:
 
 | Diffusion |  FKPP | Ex. FKPP |
 |-----------|-------|----------|
 |-57.41     |-355.81| -564.46  |
 
+The AIC is a suboptimal choice for model comparison metric. 
+
+Ideally, we would use leave-k-out cross validation, however, we do not have enough data!
 "
 )
 
@@ -288,18 +293,14 @@ md"
 # ╔═╡ 73b8faa9-2cd2-406a-aaa6-ff01225a5267
 LocalResource("/Users/pavanchaggar/Projects/model-selection/sub12-exfkpp.mp4")
 
-# ╔═╡ 077c5434-21c1-4660-a4ab-e1165daac50c
-md"
-# Limitations + Conclusions"
-
 # ╔═╡ 255536ce-88eb-474b-b465-84a75edbd767
 md" 
-## Limitations + Conclusions 
+# Limitations + Conclusions 
 * We can use models to describe various processes in AD. 
 * ...However, the models are macro-scale descriptions of AD that don't provide a lot of mechanistic **explanation**.
 
 * Using Bayesian inference, we can calibrate models and estimate patient disease trajectories. 
-* ...However, we have very limited and noisy longitudinal patient data that makes it hard to perform model comparison. 
+* ...However, we have very limited and noisy longitudinal patient data that makes it hard to perform inference and model comparison. 
 "
 
 # ╔═╡ 82411fe9-4773-4aea-8710-f2ae15692585
@@ -344,12 +345,11 @@ md"# Questions?"
 # ╟─a582faef-85ac-4a51-ba4f-5bbf1e2e630f
 # ╟─5905156f-3fd2-4ab2-ac53-305eba364f03
 # ╟─297e476a-bd0d-4306-9495-65ef12c7c7bf
-# ╠═78ae1e7f-9e12-47cd-899a-b8e1fa0c6ed5
+# ╟─78ae1e7f-9e12-47cd-899a-b8e1fa0c6ed5
 # ╟─af440978-f6f2-4a37-9af1-b9972a1240d2
 # ╟─b60c10fd-3407-4130-b265-62b7cfb622cb
 # ╟─492cc06c-27a4-4260-bb2f-09b6543df85b
 # ╟─9b8853ca-4c6f-421a-8c88-379180500225
 # ╟─73b8faa9-2cd2-406a-aaa6-ff01225a5267
-# ╟─077c5434-21c1-4660-a4ab-e1165daac50c
 # ╟─255536ce-88eb-474b-b465-84a75edbd767
 # ╟─82411fe9-4773-4aea-8710-f2ae15692585
